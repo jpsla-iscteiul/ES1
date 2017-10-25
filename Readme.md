@@ -12,9 +12,9 @@ Grupo 44
 
 81611, Délcio Pedro, Developer
 
-79170, Ansumane Mané, 
+79170, Ansumane Mané, Quality Manager
 
-Quality Manager
+
 
 Anti Spam Configuration For Leisure Mailbox
 
