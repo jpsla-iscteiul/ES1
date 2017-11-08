@@ -67,7 +67,7 @@ public class AntiSpamFilterController {
 	
 	/**
 	 * 
-	 * Este método permita guardar as alterações aos nomes e pesos das regras.
+	 * Este método permite guardar as alterações aos nomes e pesos das regras.
 	 * 
 	 */
 	
