@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 /**
  *
  * @author João Lola
- * 
+ * @author Délcio Pedro
  * 
  *
  */
