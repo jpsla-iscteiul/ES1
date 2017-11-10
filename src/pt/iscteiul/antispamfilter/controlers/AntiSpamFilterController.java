@@ -62,6 +62,13 @@ public class AntiSpamFilterController {
 		
 	}
 	
+	
+	@FXML
+	
+	private void load() {
+		
+	}
+	
 	 
 	@FXML
 	
@@ -79,6 +86,12 @@ public class AntiSpamFilterController {
 	@FXML
 	
 	private void edit() {
+		
+	}
+	
+	@FXML
+	
+	private void saveConfiguration() {
 		
 	}
 	
