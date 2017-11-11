@@ -18,19 +18,14 @@ public class AntiSpamFilterController {
 	/* GUI TEXTFIELD'S DECLARATION	*/
 	
 	@FXML
-	private TextField rulesFileTF;
+	private TextField rulesTF;
 	
 	@FXML
-	private TextField spamFileTF;
+	private TextField spamTF;
 	
 	@FXML
-	private TextField hamFileTF;
+	private TextField hamTF;
 	
-	@FXML
-	private TextField weight1TF;
-	
-	@FXML
-	private TextField weight2TF;
 	
 	/* GUI LABEL'S DECLARATION	*/
 	
@@ -49,11 +44,19 @@ public class AntiSpamFilterController {
 	
 	/* GUI LISTVIEW'S DECLARATION*/
 	
+	//Parametrizar - Não Esquecer//
+	
 	@FXML
 	private ListView rulesLV;
 	
 	@FXML
+	private ListView weightsLV;
+	
+	@FXML
 	private ListView optRulesLV;
+	
+	@FXML
+	private ListView optWeightsLV;
 	
 	
 	@FXML
