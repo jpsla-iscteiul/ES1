@@ -95,6 +95,7 @@ public class AntiSpamFilterController {
 
 	}
 
+	// Metodo para procurar o ficheiro e guardar o seu path
 	public void browse() {
 
 		FileChooser fc = new FileChooser();
@@ -113,7 +114,7 @@ public class AntiSpamFilterController {
 		}
 	}
 
-
+// Metodo para ler os ficheiros e carregar o ficheiro rules file para a list view rulesLV
 	public void load() {
 		
 		ObservableList<String> regras = FXCollections.observableArrayList();

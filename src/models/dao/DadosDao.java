@@ -7,10 +7,9 @@ import javafx.collections.ObservableList;;
 
 
 
-
+//Classe para ler os ficheiros 
 public class DadosDao {
 
-	
 	public void lerFicheiro(String nomeFicheiro, ObservableList<String> regras) {
 		
 		try {
