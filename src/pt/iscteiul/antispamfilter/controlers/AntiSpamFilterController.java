@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import models.dao.*;
 import java.io.File;
+import java.util.Random;
 
 /**
  *
@@ -23,20 +24,19 @@ import java.io.File;
 public class AntiSpamFilterController {
 
 	/* GUI TEXTFIELD'S DECLARATION */
-    @FXML 
-    CheckBox rulesCB;
-    @FXML 
-    CheckBox spamCB;
-    @FXML 
-    CheckBox hamCB;
-	
-    
-    @FXML
-	private TextField rulesTF;
+	@FXML
+	private CheckBox rulesCB;
+	@FXML
+	private CheckBox spamCB;
+	@FXML
+	private CheckBox hamCB;
 
 	@FXML
+	private TextField weightsTF;
+	@FXML
+	private TextField rulesTF;
+	@FXML
 	private TextField spamTF;
-
 	@FXML
 	private TextField hamTF;
 
@@ -44,13 +44,10 @@ public class AntiSpamFilterController {
 
 	@FXML
 	private Label fpLBL;
-
 	@FXML
 	private Label fnLBL;
-
 	@FXML
 	private Label optFpLBL;
-
 	@FXML
 	private Label optFnLBL;
 
@@ -60,15 +57,14 @@ public class AntiSpamFilterController {
 
 	@FXML
 	private ListView<String> rulesLV;
-
 	@FXML
 	private ListView<Integer> weightsLV;
-
 	@FXML
 	private ListView optRulesLV;
-
 	@FXML
 	private ListView optWeightsLV;
+	ObservableList<String> regras = FXCollections.observableArrayList();
+	ObservableList<Integer> weights = FXCollections.observableArrayList();
 
 	@FXML
 	void initialize() {
@@ -101,42 +97,43 @@ public class AntiSpamFilterController {
 		FileChooser fc = new FileChooser();
 		File selectedFile = fc.showOpenDialog(null);
 		String path = selectedFile.getPath();
-		
-		if(rulesCB.isSelected()) {
+
+		if (rulesCB.isSelected()) {
 			rulesTF.setText(path);
 			rulesCB.setSelected(false);
-		}else if(hamCB.isSelected()){
-		hamTF.setText(path);
-		hamCB.setSelected(false);
-		}else if(spamCB.isSelected()) {
+		}
+		if (hamCB.isSelected()) {
+			hamTF.setText(path);
+			hamCB.setSelected(false);
+		}
+		if (spamCB.isSelected()) {
 			spamTF.setText(path);
-			spamCB.setSelected(false);		
+			spamCB.setSelected(false);
 		}
 	}
 
-// Metodo para ler os ficheiros e carregar o ficheiro rules file para a list view rulesLV
+	// Metodo para ler os ficheiros e carregar o ficheiro rules file para a list
+	// view rulesLV
 	public void load() {
-		
-		ObservableList<String> regras = FXCollections.observableArrayList();
-		ObservableList<String> hams = FXCollections.observableArrayList();
-		ObservableList<String> spams = FXCollections.observableArrayList();
-		ObservableList<Integer> weights = FXCollections.observableArrayList();
-	
-			
+
 		DadosDao d = new DadosDao();
 		d.lerFicheiro(rulesTF.getText(), regras);
-		d.lerFicheiro(hamTF.getText(), hams);
-		d.lerFicheiro(spamTF.getText(), spams);
-		rulesLV.setItems(regras);
-			
-		for (int i = 0; i < regras.size(); i++) {
-			weights.add(0);
-		}
 
+		rulesLV.setItems(regras);
+		for (int i = 0; i < regras.size(); i++) {
+			Random random = new Random();
+			weights.add(random.nextInt(6));
+		}
 		weightsLV.setItems(weights);
-		weightsLV.setEditable(true);
 	}
-	
-	
-	
+
+	public void editWeights() {
+
+		int weight = Integer.parseInt(weightsTF.getText());
+		int position = weightsLV.getSelectionModel().getSelectedIndex();
+		System.out.println("peso" + weight + "position" + position);
+		weights.set(position, weight);
+		weightsLV.setItems(weights);
+	}
+
 }
