@@ -4,13 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import models.dao.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Random;
 
 /**
@@ -20,7 +22,6 @@ import java.util.Random;
  * 
  *
  */
-
 public class AntiSpamFilterController {
 
 	/* GUI TEXTFIELD'S DECLARATION */
@@ -30,7 +31,8 @@ public class AntiSpamFilterController {
 	private CheckBox spamCB;
 	@FXML
 	private CheckBox hamCB;
-
+	@FXML
+	private ChoiceBox<Integer> weightCB;
 	@FXML
 	private TextField weightsTF;
 	@FXML
@@ -54,21 +56,22 @@ public class AntiSpamFilterController {
 	/* GUI LISTVIEW'S DECLARATION */
 
 	// Parametrizar - Não Esquecer//
-
 	@FXML
 	private ListView<String> rulesLV;
 	@FXML
 	private ListView<Integer> weightsLV;
 	@FXML
-	private ListView optRulesLV;
+	private ListView<String> optRulesLV;
 	@FXML
-	private ListView optWeightsLV;
-	ObservableList<String> regras = FXCollections.observableArrayList();
-	ObservableList<Integer> weights = FXCollections.observableArrayList();
+	private ListView<Integer> optWeightsLV;
+	private ObservableList<String> regras = FXCollections.observableArrayList();
+	private ObservableList<Integer> weights = FXCollections.observableArrayList();
+	private Integer[] pesos = { -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5 };
 
+	
 	@FXML
 	void initialize() {
-
+		
 	}
 
 	@FXML
@@ -78,17 +81,22 @@ public class AntiSpamFilterController {
 	 * Este método permite guardar as alterações aos nomes e pesos das regras.
 	 * 
 	 */
-
-	public void save() {
-
-	}
+	// gravar os pesos no ruleCF
 
 	public void edit() {
 
 	}
 
-	public void saveConfiguration() {
-
+	// O metodo evaluate (com os ficheiros spam.log e ham.log)
+// Metodo para guardar as configurações do ficheiro
+	public void saveConfiguration() throws FileNotFoundException {
+		
+		PrintWriter fileWriter = new PrintWriter(new File(rulesTF.getText()));
+		for (int i = 0; i < regras.size(); i++) {
+			fileWriter.write(regras.get(i) + ";" + weights.get(i) + " ");
+		System.out.println(regras.get(i) + ";" + weights.get(i) + " ");
+		}
+		fileWriter.close();
 	}
 
 	// Metodo para procurar o ficheiro e guardar o seu path
@@ -114,26 +122,38 @@ public class AntiSpamFilterController {
 
 	// Metodo para ler os ficheiros e carregar o ficheiro rules file para a list
 	// view rulesLV
-	public void load() {
+	public void loadFiles() {
 
 		DadosDao d = new DadosDao();
-		d.lerFicheiro(rulesTF.getText(), regras);
-
+		d.lerFicheiro(rulesTF.getText(), regras, weights);
+		// d.lerFicheiro(hamTF.getText(), regras);
+		// d.lerFicheiro(spamTF.getText(), regras);
 		rulesLV.setItems(regras);
+		weightsLV.setItems(weights);
+		weightCB.getItems().addAll(pesos);
+		if(weights.isEmpty())
+		loadContent();
+	}
+
+	// Carregar o conteudo da primeira ListView
+	private void loadContent() {
+
+		int pesoMin = -5;
+		int pesoMax = 5;
+		
+		Random random = new Random();
+		
 		for (int i = 0; i < regras.size(); i++) {
-			Random random = new Random();
-			weights.add(random.nextInt(6));
+			weights.add(random.nextInt((pesoMax - pesoMin) + 1) + pesoMin);
 		}
 		weightsLV.setItems(weights);
 	}
-
+	
 	public void editWeights() {
 
-		int weight = Integer.parseInt(weightsTF.getText());
+		int peso = (Integer) weightCB.getSelectionModel().getSelectedItem();
 		int position = weightsLV.getSelectionModel().getSelectedIndex();
-		System.out.println("peso" + weight + "position" + position);
-		weights.set(position, weight);
+		weights.set(position, peso);
 		weightsLV.setItems(weights);
 	}
-
 }

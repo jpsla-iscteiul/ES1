@@ -34,7 +34,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="668.0" layoutY="158.0" mnemonicParsing="false" onAction="#load" prefHeight="20.0" prefWidth="74.0" text="Load Files" />
+            <Button layoutX="668.0" layoutY="158.0" mnemonicParsing="false" onAction="#loadFiles" prefHeight="20.0" prefWidth="74.0" text="Load Files" />
             <CheckBox fx:id="rulesCB" layoutX="567.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Rule" />
             <CheckBox fx:id="spamCB" layoutX="567.0" layoutY="130.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" text="Ham" />
             <CheckBox fx:id="hamCB" layoutX="566.0" layoutY="184.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="82.0" text="Spam" />
@@ -53,14 +53,10 @@
             <Label fx:id="fpLBL" layoutX="78.0" layoutY="260.0" prefHeight="20.0" prefWidth="45.0" />
             <Label layoutX="123.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="50.0" text="Nº FN:" />
             <Label fx:id="fnLBL" layoutX="173.0" layoutY="261.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="50.0" />
-            <Button layoutX="668.0" layoutY="135.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="82.0" text="Save" />
+            <Button layoutX="669.0" layoutY="135.0" mnemonicParsing="false" onAction="#saveConfiguration" prefHeight="8.0" prefWidth="82.0" text="Save" />
             <ListView fx:id="weightsLV" editable="true" layoutX="331.0" layoutY="44.0" prefHeight="217.0" prefWidth="300.0" />
-            <TextField fx:id="weightsTF" layoutX="669.0" layoutY="63.0" prefHeight="25.0" prefWidth="45.0" promptText="weight">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </TextField>
-            <Button layoutX="715.0" layoutY="63.0" mnemonicParsing="false" onAction="#editWeights" text="Edit" />
+            <Button layoutX="719.0" layoutY="63.0" mnemonicParsing="false" onAction="#editWeights" text="Set" />
+            <ChoiceBox fx:id="weightCB" layoutX="669.0" layoutY="63.0" prefHeight="25.0" prefWidth="45.0" />
          </children>
       </Pane>
       <Pane layoutX="1.0" layoutY="550.0" prefHeight="340.0" prefWidth="880.0">
