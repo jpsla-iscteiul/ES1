@@ -68,10 +68,9 @@ public class AntiSpamFilterController {
 	private ObservableList<Integer> weights = FXCollections.observableArrayList();
 	private Integer[] pesos = { -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5 };
 
-	
 	@FXML
 	void initialize() {
-		
+
 	}
 
 	@FXML
@@ -88,13 +87,13 @@ public class AntiSpamFilterController {
 	}
 
 	// O metodo evaluate (com os ficheiros spam.log e ham.log)
-// Metodo para guardar as configurações do ficheiro
+	// Metodo para guardar as configurações do ficheiro
 	public void saveConfiguration() throws FileNotFoundException {
-		
+
 		PrintWriter fileWriter = new PrintWriter(new File(rulesTF.getText()));
 		for (int i = 0; i < regras.size(); i++) {
 			fileWriter.write(regras.get(i) + ";" + weights.get(i) + " ");
-		System.out.println(regras.get(i) + ";" + weights.get(i) + " ");
+			System.out.println(regras.get(i) + ";" + weights.get(i) + " ");
 		}
 		fileWriter.close();
 	}
@@ -131,8 +130,8 @@ public class AntiSpamFilterController {
 		rulesLV.setItems(regras);
 		weightsLV.setItems(weights);
 		weightCB.getItems().addAll(pesos);
-		if(weights.isEmpty())
-		loadContent();
+		if (weights.isEmpty())
+			loadContent();
 	}
 
 	// Carregar o conteudo da primeira ListView
@@ -140,15 +139,13 @@ public class AntiSpamFilterController {
 
 		int pesoMin = -5;
 		int pesoMax = 5;
-		
 		Random random = new Random();
-		
 		for (int i = 0; i < regras.size(); i++) {
 			weights.add(random.nextInt((pesoMax - pesoMin) + 1) + pesoMin);
 		}
 		weightsLV.setItems(weights);
 	}
-	
+
 	public void editWeights() {
 
 		int peso = (Integer) weightCB.getSelectionModel().getSelectedItem();
