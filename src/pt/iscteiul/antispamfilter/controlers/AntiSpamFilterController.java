@@ -104,6 +104,12 @@ public class AntiSpamFilterController {
 	}
 
 	// Metodo para procurar o ficheiro e guardar o seu path
+	/**
+	 * Método Browse permite procurar os ficheiros  
+	 * 
+	 * 
+	 */
+	
 	public void browse() {
 
 		FileChooser fc = new FileChooser();
