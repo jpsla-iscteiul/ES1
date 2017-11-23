@@ -109,7 +109,6 @@ public class AntiSpamFilterController {
 	 * 
 	 * 
 	 */
-	
 	public void browse() {
 
 		FileChooser fc = new FileChooser();
@@ -132,6 +131,11 @@ public class AntiSpamFilterController {
 
 	// Metodo para ler os ficheiros e carregar o ficheiro rules file para a list
 	// view rulesLV
+	/**
+	 * Método Browse permite procurar os ficheiros  
+	 * 
+	 * 
+	 */
 	public void loadFiles() {
 
 		DadosDao d = new DadosDao();
