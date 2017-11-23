@@ -85,9 +85,14 @@ public class AntiSpamFilterController {
 	public void edit() {
 
 	}
-
+		
 	// O metodo evaluate (com os ficheiros spam.log e ham.log)
 	// Metodo para guardar as configurações do ficheiro
+	/**
+	 * Método Save
+	 * 
+	 * 
+	 */
 	public void saveConfiguration() throws FileNotFoundException {
 
 		PrintWriter fileWriter = new PrintWriter(new File(rulesTF.getText()));
