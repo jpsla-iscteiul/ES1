@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
-import javafx.collections.ObservableList;;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;;
 
 //Classe para ler os ficheiros 
 public class DadosDao {
@@ -30,7 +32,9 @@ public class DadosDao {
 			}
 			s.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Nao encontrou o ficheiro");
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Erro! O Ficheiro Não Foi Encontrado Na Directória!");
+			alert.showAndWait();
 		}
 	}
 
@@ -43,7 +47,9 @@ public class DadosDao {
 			buffW.close();
 			System.out.println("File Written");
 		} catch (Exception e) {
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Erro! Não foi escrever no ficheiro.");
+			alert.showAndWait();
 		}
 	}
 }
