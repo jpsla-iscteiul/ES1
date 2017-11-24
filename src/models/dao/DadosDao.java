@@ -32,7 +32,7 @@ public class DadosDao {
 			}
 			s.close();
 		} catch (FileNotFoundException e) {
-			Alert alert = new Alert(AlertType.INFORMATION);
+			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Erro! O Ficheiro Não Foi Encontrado Na Directória!");
 			alert.showAndWait();
 		}
@@ -47,7 +47,7 @@ public class DadosDao {
 			buffW.close();
 			System.out.println("File Written");
 		} catch (Exception e) {
-			Alert alert = new Alert(AlertType.INFORMATION);
+			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Erro! Não foi escrever no ficheiro.");
 			alert.showAndWait();
 		}

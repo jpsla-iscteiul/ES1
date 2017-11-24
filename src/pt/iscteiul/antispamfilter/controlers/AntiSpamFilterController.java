@@ -3,11 +3,13 @@ package pt.iscteiul.antispamfilter.controlers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import models.dao.*;
 import java.io.File;
@@ -132,8 +134,12 @@ public class AntiSpamFilterController {
 		weightCB.getItems().addAll(pesos);
 		if (weights.isEmpty())
 			loadContent();
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setHeaderText("Regras carregadas com sucesso!");
+		alert.showAndWait();
 	}
-
+	
 	// Carregar o conteudo da primeira ListView
 	private void loadContent() {
 
