@@ -136,7 +136,6 @@ public class AntiSpamFilterController {
 		
 		int FPValue;
 		int FNValue;
-		
 		DadosDao dadosDao = new DadosDao();
 		FPValue = dadosDao.readsHamFile(spamTF.getText(), regras, weights);
 		FNValue = dadosDao.readSpamFile(hamTF.getText(), regras, weights);

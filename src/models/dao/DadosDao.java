@@ -67,7 +67,6 @@ public class DadosDao {
 		} catch (Exception e) {
 			System.out.println("Ficheiro não encontrado!");
 		}
-		//System.out.println("Falso Positivo ===> "+FPValue+"!!\n\n");
 		return FPValue;
 	}
 	
@@ -91,7 +90,6 @@ public class DadosDao {
 		 * Lê ficheiro de spam.log para calcular a somatória de números de Falso Positivo
 		 */
 		try {
-			
 			FileReader fileReader = new FileReader(hamFile);
 			BufferedReader readFile = new BufferedReader(fileReader);
 			
@@ -127,7 +125,6 @@ public class DadosDao {
 		} catch (Exception e) {
 			System.out.println("Ficheiro não encontrado!");
 		}
-		//System.out.println("Falso Negativo  ===> "+FNValue+"\n\n");
 		return FNValue;
 	}
 
