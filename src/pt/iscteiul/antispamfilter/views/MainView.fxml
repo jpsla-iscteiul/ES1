@@ -19,12 +19,12 @@
                   <Font size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="spamTF" alignment="CENTER" layoutX="133.0" layoutY="103.0" prefHeight="25.0" prefWidth="398.0" promptText="Ham File">
+            <TextField fx:id="hamTF" alignment="CENTER" layoutX="133.0" layoutY="103.0" prefHeight="25.0" prefWidth="398.0" promptText="Ham File">
                <font>
                   <Font size="13.0" />
                </font>
             </TextField>
-            <TextField fx:id="hamTF" alignment="CENTER" layoutX="133.0" layoutY="146.0" prefHeight="25.0" prefWidth="398.0" promptText="Spam File">
+            <TextField fx:id="spamTF" alignment="CENTER" layoutX="133.0" layoutY="146.0" prefHeight="25.0" prefWidth="398.0" promptText="Spam File">
                <font>
                   <Font size="13.0" />
                </font>
@@ -37,8 +37,8 @@
             </Label>
             <Button layoutX="633.0" layoutY="129.0" mnemonicParsing="false" onAction="#loadFiles" prefHeight="31.0" prefWidth="92.0" text="Load Files" />
             <CheckBox fx:id="rulesCB" layoutX="538.0" layoutY="61.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Rule" />
-            <CheckBox fx:id="spamCB" layoutX="537.0" layoutY="102.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" text="Ham" />
-            <CheckBox fx:id="hamCB" layoutX="537.0" layoutY="149.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="82.0" text="Spam" />
+            <CheckBox fx:id="hamCB" layoutX="537.0" layoutY="102.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" text="Ham" />
+            <CheckBox fx:id="spamCB" layoutX="537.0" layoutY="149.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="82.0" text="Spam" />
          </children>
       </Pane>
       <Pane layoutY="209.0" prefHeight="294.0" prefWidth="840.0">

@@ -3,13 +3,11 @@ package pt.iscteiul.antispamfilter.controlers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import models.dao.*;
 import java.io.File;
@@ -69,7 +67,6 @@ public class AntiSpamFilterController {
 	private ObservableList<String> regras = FXCollections.observableArrayList();
 	private ObservableList<Integer> weights = FXCollections.observableArrayList();
 	private Integer[] pesos = { -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5 };
-
 	@FXML
 	void initialize() {
 
@@ -87,26 +84,37 @@ public class AntiSpamFilterController {
 	public void edit() {
 
 	}
-
+		
 	// O metodo evaluate (com os ficheiros spam.log e ham.log)
 	// Metodo para guardar as configurações do ficheiro
+	/**
+	 * Método Save
+	 * 
+	 * 
+	 */
 	public void saveConfiguration() throws FileNotFoundException {
 
-		PrintWriter fileWriter = new PrintWriter(new File(rulesTF.getText()));
+		PrintWriter fileWriterrulesTF = new PrintWriter(new File(rulesTF.getText()));
+				
 		for (int i = 0; i < regras.size(); i++) {
-			fileWriter.write(regras.get(i) + ";" + weights.get(i) + " ");
+			fileWriterrulesTF.write(regras.get(i) + ";" + weights.get(i) + " ");
 			System.out.println(regras.get(i) + ";" + weights.get(i) + " ");
 		}
-		fileWriter.close();
+		fileWriterrulesTF.close();
 	}
 
 	// Metodo para procurar o ficheiro e guardar o seu path
+	/**
+	 * Método Browse permite procurar os ficheiros  
+	 * 
+	 * 
+	 */
 	public void browse() {
 
 		FileChooser fc = new FileChooser();
 		File selectedFile = fc.showOpenDialog(null);
 		String path = selectedFile.getPath();
-
+		
 		if (rulesCB.isSelected()) {
 			rulesTF.setText(path);
 			rulesCB.setSelected(false);
@@ -121,23 +129,42 @@ public class AntiSpamFilterController {
 		}
 	}
 
+	/**
+	 * Metodo loadHamSpamFile que chama metodos (readsHamFile e readSpamFile).
+	 */
+	public void loadHamSpamFile(){
+		
+		int FPValue;
+		int FNValue;
+		DadosDao dadosDao = new DadosDao();
+		FPValue = dadosDao.readsHamFile(spamTF.getText(), regras, weights);
+		FNValue = dadosDao.readSpamFile(hamTF.getText(), regras, weights);
+		
+		System.out.println("FP ==> "+ FPValue +"\n\n");
+		System.out.println("FN ==> "+ FNValue +"\n\n");
+	}
+	
 	// Metodo para ler os ficheiros e carregar o ficheiro rules file para a list
 	// view rulesLV
+	/**
+	 * Método Browse permite procurar os ficheiros  
+	 * 
+	 * 
+	 */
 	public void loadFiles() {
-
 		DadosDao d = new DadosDao();
 		d.lerFicheiro(rulesTF.getText(), regras, weights);
+		
+		//System.out.println("Regras ===>" + regras + "\n\n\n");
 		// d.lerFicheiro(hamTF.getText(), regras);
 		// d.lerFicheiro(spamTF.getText(), regras);
 		rulesLV.setItems(regras);
 		weightsLV.setItems(weights);
 		weightCB.getItems().addAll(pesos);
+		
 		if (weights.isEmpty())
 			loadContent();
-		
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setHeaderText("Regras carregadas com sucesso!");
-		alert.showAndWait();
+
 	}
 	
 	// Carregar o conteudo da primeira ListView
@@ -150,6 +177,7 @@ public class AntiSpamFilterController {
 			weights.add(random.nextInt((pesoMax - pesoMin) + 1) + pesoMin);
 		}
 		weightsLV.setItems(weights);
+		//System.out.println("weights ===>" + weights + "\n");
 	}
 
 	public void editWeights() {
