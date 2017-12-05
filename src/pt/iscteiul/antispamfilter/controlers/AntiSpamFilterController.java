@@ -32,7 +32,7 @@ public class AntiSpamFilterController {
 	@FXML
 	private CheckBox hamCB;
 	@FXML
-	private ChoiceBox<Integer> weightCB;
+	private ChoiceBox<Double> weightCB;
 	@FXML
 	private TextField weightsTF;
 	@FXML
@@ -59,14 +59,15 @@ public class AntiSpamFilterController {
 	@FXML
 	private ListView<String> rulesLV;
 	@FXML
-	private ListView<Integer> weightsLV;
+	private ListView<Double> weightsLV;
 	@FXML
 	private ListView<String> optRulesLV;
 	@FXML
-	private ListView<Integer> optWeightsLV;
+	private ListView<Double> optWeightsLV;
 	private ObservableList<String> regras = FXCollections.observableArrayList();
-	private ObservableList<Integer> weights = FXCollections.observableArrayList();
-	private Integer[] pesos = { -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5 };
+	private ObservableList<Double> weights = FXCollections.observableArrayList();
+	private Double[] pesos = { -5.0, -4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0, 5.0 };
+
 	@FXML
 	void initialize() {
 
@@ -84,7 +85,7 @@ public class AntiSpamFilterController {
 	public void edit() {
 
 	}
-		
+
 	// O metodo evaluate (com os ficheiros spam.log e ham.log)
 	// Metodo para guardar as configurações do ficheiro
 	/**
@@ -95,7 +96,7 @@ public class AntiSpamFilterController {
 	public void saveConfiguration() throws FileNotFoundException {
 
 		PrintWriter fileWriterrulesTF = new PrintWriter(new File(rulesTF.getText()));
-				
+
 		for (int i = 0; i < regras.size(); i++) {
 			fileWriterrulesTF.write(regras.get(i) + ";" + weights.get(i) + " ");
 			System.out.println(regras.get(i) + ";" + weights.get(i) + " ");
@@ -105,7 +106,7 @@ public class AntiSpamFilterController {
 
 	// Metodo para procurar o ficheiro e guardar o seu path
 	/**
-	 * Método Browse permite procurar os ficheiros  
+	 * Método Browse permite procurar os ficheiros
 	 * 
 	 * 
 	 */
@@ -114,7 +115,7 @@ public class AntiSpamFilterController {
 		FileChooser fc = new FileChooser();
 		File selectedFile = fc.showOpenDialog(null);
 		String path = selectedFile.getPath();
-		
+
 		if (rulesCB.isSelected()) {
 			rulesTF.setText(path);
 			rulesCB.setSelected(false);
@@ -132,57 +133,61 @@ public class AntiSpamFilterController {
 	/**
 	 * Metodo loadHamSpamFile que chama metodos (readsHamFile e readSpamFile).
 	 */
-	public void loadHamSpamFile(){
-		
+	public void loadHamSpamFile() {
+
 		int FPValue;
 		int FNValue;
 		DadosDao dadosDao = new DadosDao();
 		FPValue = dadosDao.readsHamFile(spamTF.getText(), regras, weights);
 		FNValue = dadosDao.readSpamFile(hamTF.getText(), regras, weights);
-		
-		System.out.println("FP ==> "+ FPValue +"\n\n");
-		System.out.println("FN ==> "+ FNValue +"\n\n");
+
+		System.out.println("FP ==> " + FPValue + "\n\n");
+		System.out.println("FN ==> " + FNValue + "\n\n");
 	}
-	
+
 	// Metodo para ler os ficheiros e carregar o ficheiro rules file para a list
 	// view rulesLV
 	/**
-	 * Método Browse permite procurar os ficheiros  
+	 * Método Browse permite procurar os ficheiros
 	 * 
 	 * 
 	 */
 	public void loadFiles() {
 		DadosDao d = new DadosDao();
 		d.lerFicheiro(rulesTF.getText(), regras, weights);
-		
-		//System.out.println("Regras ===>" + regras + "\n\n\n");
+
+		// System.out.println("Regras ===>" + regras + "\n\n\n");
 		// d.lerFicheiro(hamTF.getText(), regras);
 		// d.lerFicheiro(spamTF.getText(), regras);
+
 		rulesLV.setItems(regras);
 		weightsLV.setItems(weights);
 		weightCB.getItems().addAll(pesos);
-		
+
 		if (weights.isEmpty())
 			loadContent();
+		
 
 	}
-	
+
 	// Carregar o conteudo da primeira ListView
 	private void loadContent() {
 
-		int pesoMin = -5;
-		int pesoMax = 5;
 		Random random = new Random();
-		for (int i = 0; i < regras.size(); i++) {
-			weights.add(random.nextInt((pesoMax - pesoMin) + 1) + pesoMin);
+		double pesoMin = -5;
+		double pesoMax = 5;
+		for (int i = 0; i < 10; i++) {
+			
+			weights.addAll(random.nextDouble() * (pesoMax - pesoMin) + pesoMin);
+
 		}
 		weightsLV.setItems(weights);
-		//System.out.println("weights ===>" + weights + "\n");
+		System.out.println("weights ===>" + weights + "\n");
 	}
 
 	public void editWeights() {
 
-		int peso = (Integer) weightCB.getSelectionModel().getSelectedItem();
+		double peso = (Double) weightCB.getSelectionModel().getSelectedItem();
 		int position = weightsLV.getSelectionModel().getSelectedIndex();
 		weights.set(position, peso);
 		weightsLV.setItems(weights);

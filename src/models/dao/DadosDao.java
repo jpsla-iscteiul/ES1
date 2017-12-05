@@ -22,7 +22,7 @@ public class DadosDao {
 	 * @param pesos
 	 * @return FNValue (retorna a somatória de números de Falso Negativo)
 	 */
-	public int readsHamFile(String hamFile,ObservableList<String> regras, ObservableList<Integer> pesos){
+	public int readsHamFile(String hamFile,ObservableList<String> regras, ObservableList<Double> pesos){
 		int contFP, contPeso,FPValue;
 		contFP = contPeso = FPValue = 0;
 		String line = "";
@@ -80,7 +80,7 @@ public class DadosDao {
 	 * @param pesos
 	 * @return FNValue (retorna a somatória de números de Falso Positivo)
 	 */
-	public int readSpamFile(String spamFile,ObservableList<String> regras, ObservableList<Integer> pesos){
+	public int readSpamFile(String spamFile,ObservableList<String> regras, ObservableList<Double> pesos){
 		int contFN,contPeso,FNValue;
 		contFN = FNValue = contPeso = 0;
 		String line = "";
@@ -136,7 +136,7 @@ public class DadosDao {
 	 * @param regras
 	 * @param pesos
 	 */
-	public void lerFicheiro(String nomeFicheiro, ObservableList<String> regras, ObservableList<Integer> pesos) {
+	public void lerFicheiro(String nomeFicheiro, ObservableList<String> regras, ObservableList<Double> pesos) {
 
 		try {
 			Scanner s = new Scanner(new File(nomeFicheiro));
@@ -147,7 +147,7 @@ public class DadosDao {
 				if (line.contains(";")) {
 					int pos = line.indexOf(";");
 					regras.add(line.substring(0, pos));
-					int peso = Integer.parseInt(line.substring(pos+1));
+					double peso = Double.parseDouble(line.substring(pos+1));
 					pesos.add(peso);
 					System.out.println(peso);
 				}else {

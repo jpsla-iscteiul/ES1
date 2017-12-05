@@ -23,7 +23,7 @@ import java.util.List;
 
 public class AntiSpamFilterAutomaticConfiguration {
   private static final int INDEPENDENT_RUNS = 5 ;
-
+  //Mudar nome para nome mais desejavel.
   public static void main(String[] args) throws IOException {
     String experimentBaseDirectory = "experimentBaseDirectory";
 
@@ -32,7 +32,7 @@ public class AntiSpamFilterAutomaticConfiguration {
 
     List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> algorithmList =
             configureAlgorithmList(problemList);
-
+    //Caminhos para as pastas
     Experiment<DoubleSolution, List<DoubleSolution>> experiment =
         new ExperimentBuilder<DoubleSolution, List<DoubleSolution>>("AntiSpamStudy")
             .setAlgorithmList(algorithmList)
