@@ -36,8 +36,8 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	   * 
 	   */
 	  public void evaluate(DoubleSolution solution){
-	    double aux, xi, xj;
-	    double[] fx = new double[getNumberOfObjectives()];
+	    //double aux, xi, xj;
+	    //double[] fx = new double[getNumberOfObjectives()];
 	    double[] x = new double[getNumberOfVariables()];
 	    /*Extracao do vetor de pesos do objecto solution*/
 	    for (int i = 0; i < solution.getNumberOfVariables(); i++) {
@@ -46,18 +46,21 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	    
 	    //Dica criar uma função que calcula o numero de falos potivos e negativos e invoca-la aqui
 	    
-	    /* Código tem de ser subnstituido, o prof so criou para testar a framework
-	    fx[0] = 0.0;
-	    for (int var = 0; var < solution.getNumberOfVariables() - 1; var++) {
-		  fx[0] += Math.abs(x[0]); // Example for testing
-	    }
+	    // Código tem de ser subnstituido
+//	    fx[0] = 0.0;
+//	    for (int var = 0; var < solution.getNumberOfVariables() - 1; var++) {
+//		  fx[0] += Math.abs(x[0]); // Example for testing
+//	    }
+//	    
+//	    fx[1] = 0.0;
+//	    for (int var = 0; var < solution.getNumberOfVariables(); var++) {
+//	    	fx[1] += Math.abs(x[1]); // Example for testing
+//	    }
+	    int FP=0, FN=0;
 	    
-	    fx[1] = 0.0;
-	    for (int var = 0; var < solution.getNumberOfVariables(); var++) {
-	    	fx[1] += Math.abs(x[1]); // Example for testing
-	    }
-		*/
-	    solution.setObjective(0, fx[0]);
-	    solution.setObjective(1, fx[1]);
+	    
+		
+	    solution.setObjective(0, FP/*fx[0]*/);
+	    solution.setObjective(1, FN/*fx[1]*/);
 	  }
 	}

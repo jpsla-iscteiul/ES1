@@ -8,11 +8,11 @@ Grupo 44
 
 83169, João Lola, Scrum Master
 
-83455, Cedrick Beta, Developer
+79170, Ansumane Mané, Developer
 
 81611, Délcio Pedro, Developer
 
-79170, Ansumane Mané, Quality Manager
+83455, Cedrick Beta, Quality Manager
 
 
 
