@@ -46,7 +46,7 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	    
 	    //Dica criar uma função que calcula o numero de falos potivos e negativos e invoca-la aqui
 	    
-	    // Código tem de ser subnstituido
+	    // Código tem de ser substituido
 //	    fx[0] = 0.0;
 //	    for (int var = 0; var < solution.getNumberOfVariables() - 1; var++) {
 //		  fx[0] += Math.abs(x[0]); // Example for testing
