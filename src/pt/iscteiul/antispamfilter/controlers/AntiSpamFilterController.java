@@ -9,7 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
-import models.dao.*;
+import pt.iscteiul.antispamfilter.AntiSpamFilterAutomaticConfiguration;
+import pt.iscteiul.antispamfilter.models.dao.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -130,6 +132,13 @@ public class AntiSpamFilterController {
 		}
 	}
 
+	public void generateOptimizedConfiguration() {
+
+		AntiSpamFilterAutomaticConfiguration anti = new AntiSpamFilterAutomaticConfiguration();
+		optFnLBL.setText(String.valueOf(20));
+		optFpLBL.setText(String.valueOf(100));
+	}
+
 	/**
 	 * Metodo loadHamSpamFile que chama metodos (readsHamFile e readSpamFile).
 	 */
@@ -138,11 +147,15 @@ public class AntiSpamFilterController {
 		int FPValue;
 		int FNValue;
 		DadosDao dadosDao = new DadosDao();
-		FPValue = dadosDao.readsHamFile(spamTF.getText(), regras, weights);
-		FNValue = dadosDao.readSpamFile(hamTF.getText(), regras, weights);
+		FPValue = dadosDao.readsHamFile(hamTF.getText(), regras, weights);
+		FNValue = dadosDao.readSpamFile(spamTF.getText(), regras, weights);
 
 		System.out.println("FP ==> " + FPValue + "\n\n");
 		System.out.println("FN ==> " + FNValue + "\n\n");
+
+		fpLBL.setText(String.valueOf(FPValue));
+		fnLBL.setText(String.valueOf(FNValue));
+
 	}
 
 	// Metodo para ler os ficheiros e carregar o ficheiro rules file para a list
@@ -164,9 +177,11 @@ public class AntiSpamFilterController {
 		weightsLV.setItems(weights);
 		weightCB.getItems().addAll(pesos);
 
+		optRulesLV.setItems(regras);
+
 		if (weights.isEmpty())
 			loadContent();
-		
+		loadHamSpamFile();
 
 	}
 
@@ -174,15 +189,17 @@ public class AntiSpamFilterController {
 	private void loadContent() {
 
 		Random random = new Random();
-		double pesoMin = -5;
-		double pesoMax = 5;
-		for (int i = 0; i < 10; i++) {
-			
+		double pesoMin = -5.1;
+		double pesoMax = 5.1;
+		for (int i = 0; i < regras.size(); i++) {
+
 			weights.addAll(random.nextDouble() * (pesoMax - pesoMin) + pesoMin);
 
 		}
 		weightsLV.setItems(weights);
+
 		System.out.println("weights ===>" + weights + "\n");
+
 	}
 
 	public void editWeights() {

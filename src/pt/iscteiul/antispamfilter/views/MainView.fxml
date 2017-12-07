@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.iscteiul.antispamfilter.controlers.AntiSpamFilterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.iscteiul.antispamfilter.controlers.AntiSpamFilterController">
    <children>
       <Pane prefHeight="208.0" prefWidth="840.0">
          <children>
@@ -30,7 +30,7 @@
                </font>
             </TextField>
             <Button layoutX="633.0" layoutY="73.0" mnemonicParsing="false" onAction="#browse" prefHeight="31.0" prefWidth="92.0" text="Browse" />
-            <Label layoutX="222.0" layoutY="13.0" text="Path For File Configuration" textAlignment="CENTER">
+            <Label layoutX="33.0" layoutY="19.0" prefHeight="27.0" prefWidth="220.0" text="Path For File Configuration" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -41,40 +41,49 @@
             <CheckBox fx:id="spamCB" layoutX="537.0" layoutY="149.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="82.0" text="Spam" />
          </children>
       </Pane>
-      <Pane layoutY="209.0" prefHeight="294.0" prefWidth="840.0">
+      <Pane layoutY="192.0" prefHeight="274.0" prefWidth="840.0">
          <children>
-            <ListView fx:id="rulesLV" layoutX="32.0" layoutY="44.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="300.0" />
-            <Label layoutX="261.0" layoutY="8.0" minWidth="-Infinity" prefHeight="27.0" prefWidth="139.0" text="Rule&amp;Weight List" textAlignment="CENTER">
+            <ListView fx:id="rulesLV" layoutX="32.0" layoutY="56.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="177.0" prefWidth="300.0" />
+            <Label layoutX="31.0" layoutY="8.0" minWidth="-Infinity" prefHeight="27.0" prefWidth="137.0" text="User Spam Filter" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="663.0" layoutY="134.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" text="Evaluation" textAlignment="CENTER" wrapText="true" />
-            <Label layoutX="32.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="45.0" text="Nº FP:" />
-            <Label fx:id="fpLBL" layoutX="78.0" layoutY="260.0" prefHeight="20.0" prefWidth="45.0" />
-            <Label layoutX="123.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="50.0" text="Nº FN:" />
-            <Label fx:id="fnLBL" layoutX="173.0" layoutY="261.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="50.0" />
-            <Button layoutX="663.0" layoutY="184.0" mnemonicParsing="false" onAction="#saveConfiguration" prefHeight="31.0" prefWidth="112.0" text="Save" />
-            <ListView fx:id="weightsLV" editable="true" layoutX="331.0" layoutY="44.0" prefHeight="217.0" prefWidth="300.0" />
-            <Button layoutX="734.0" layoutY="63.0" mnemonicParsing="false" onAction="#editWeights" text="Set" />
-            <ChoiceBox fx:id="weightCB" layoutX="663.0" layoutY="63.0" prefHeight="31.0" prefWidth="66.0" />
+            <Button fx:id="loadHamSpamFile" layoutX="673.0" layoutY="154.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="120.0" text="Filter Evaluation" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="32.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="45.0" text="Nº FP:" />
+            <Label fx:id="fpLBL" layoutX="78.0" layoutY="245.0" prefHeight="20.0" prefWidth="45.0" />
+            <Label layoutX="123.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="50.0" text="Nº FN:" />
+            <Label fx:id="fnLBL" layoutX="173.0" layoutY="246.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="50.0" />
+            <Button layoutX="673.0" layoutY="202.0" mnemonicParsing="false" onAction="#saveConfiguration" prefHeight="31.0" prefWidth="120.0" text="Save Configuration" />
+            <ListView fx:id="weightsLV" editable="true" layoutX="331.0" layoutY="56.0" prefHeight="177.0" prefWidth="300.0" />
+            <Button layoutX="748.0" layoutY="89.0" mnemonicParsing="false" onAction="#editWeights" prefHeight="31.0" prefWidth="45.0" text="Set" />
+            <ChoiceBox fx:id="weightCB" layoutX="675.0" layoutY="89.0" prefHeight="31.0" prefWidth="66.0" />
+            <Label alignment="CENTER" layoutX="685.0" layoutY="56.0" text="Change Weight" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="34.0" layoutY="36.0" prefHeight="20.0" prefWidth="300.0" text="Rules" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="332.0" layoutY="36.0" prefHeight="20.0" prefWidth="300.0" text="Weight" textAlignment="CENTER" />
          </children>
       </Pane>
-      <Pane layoutX="1.0" layoutY="499.0" prefHeight="302.0" prefWidth="840.0">
+      <Pane layoutX="1.0" layoutY="493.0" prefHeight="280.0" prefWidth="840.0">
          <children>
             <Button layoutX="650.0" layoutY="105.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="163.0" text="Generate Optimized Configuration" textAlignment="CENTER" wrapText="true" />
-            <ListView fx:id="optRulesLV" layoutX="30.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="300.0" />
-            <Label layoutX="213.0" layoutY="8.0" prefHeight="27.0" prefWidth="231.0" text="Rule&amp;Weight Optimized List" textAlignment="CENTER">
+            <ListView fx:id="optRulesLV" layoutX="30.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="177.0" prefWidth="300.0" />
+            <Label layoutX="29.0" layoutY="4.0" prefHeight="27.0" prefWidth="156.0" text="NSGAII Spam Filter" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="30.0" layoutY="262.0" text="Nº FP:" />
-            <Label layoutX="121.0" layoutY="263.0" text="Nº FN:" />
-            <Label fx:id="optFpLBL" layoutX="76.0" layoutY="262.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="50.0" />
-            <Label fx:id="optFnLBL" layoutX="171.0" layoutY="262.0" prefHeight="20.0" prefWidth="50.0" />
-            <Button layoutX="650.0" layoutY="192.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="163.0" text="Save" />
-            <ListView fx:id="optWeightsLV" layoutX="329.0" layoutY="43.0" prefHeight="217.0" prefWidth="300.0" />
+            <Label layoutX="30.0" layoutY="247.0" text="Nº FP:" />
+            <Label layoutX="121.0" layoutY="248.0" text="Nº FN:" />
+            <Label fx:id="optFpLBL" layoutX="76.0" layoutY="247.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="50.0" />
+            <Label fx:id="optFnLBL" layoutX="171.0" layoutY="247.0" prefHeight="20.0" prefWidth="50.0" />
+            <Button layoutX="650.0" layoutY="192.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="163.0" text="Save Configuration" />
+            <ListView fx:id="optWeightsLV" layoutX="329.0" layoutY="60.0" prefHeight="177.0" prefWidth="300.0" />
+            <Label alignment="CENTER" layoutX="30.0" layoutY="40.0" prefHeight="20.0" prefWidth="300.0" text="Rules" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="329.0" layoutY="40.0" prefHeight="20.0" prefWidth="300.0" text="Weight" textAlignment="CENTER" />
          </children>
       </Pane>
    </children>

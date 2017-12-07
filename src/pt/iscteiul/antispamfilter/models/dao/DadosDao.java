@@ -1,4 +1,4 @@
-package models.dao;
+package pt.iscteiul.antispamfilter.models.dao;
 
 
 import java.io.BufferedReader;
@@ -14,7 +14,7 @@ import javafx.scene.control.Alert.AlertType;;
 
 //Classe para ler os ficheiros 
 public class DadosDao {
-	
+		
 	/**
 	 * 	
 	 * @param spamFile
@@ -22,9 +22,10 @@ public class DadosDao {
 	 * @param pesos
 	 * @return FNValue (retorna a somatória de números de Falso Negativo)
 	 */
+
 	public int readsHamFile(String hamFile,ObservableList<String> regras, ObservableList<Double> pesos){
-		int contFP, contPeso,FPValue;
-		contFP = contPeso = FPValue = 0;
+		int contFP, FPValue;
+		contFP = FPValue = 0;
 		String line = "";
 		String runLine = "";
 		String[] palavra = null;
@@ -42,27 +43,23 @@ public class DadosDao {
 				
 				runLine += line;
 				palavra = runLine.split("\t");
-				for(String role: regras){	
+				for (int i = 0; i < regras.size(); i++) {
 					for (int j = 0; j < palavra.length; j++) {
-						if(palavra[j].equals(role)){
-							contFP += pesos.get(contPeso); // Pega peso de cada regra encontrado
-							contPeso++;
+						if(palavra[j].equals(regras.get(i))){
+							contFP += pesos.get(i); // Pega peso de cada regra encontrado
 							if(palavra[palavra.length-1] == palavra[j]){
 								if(contFP > 5){
 									FPValue++; // contador de todos os valores de Falso Positivos de cada linha
 									contFP =  0;
-									contPeso = 0;
 									break;
 								}else{
 									contFP =  0;
-									contPeso = 0;
 									break;
 								}
 							}
 						}
 					}
 				}
-
 				line = readFile.readLine();
 			}
 			readFile.close();
@@ -80,9 +77,10 @@ public class DadosDao {
 	 * @param pesos
 	 * @return FNValue (retorna a somatória de números de Falso Positivo)
 	 */
+
 	public int readSpamFile(String spamFile,ObservableList<String> regras, ObservableList<Double> pesos){
-		int contFN,contPeso,FNValue;
-		contFN = FNValue = contPeso = 0;
+		int contFN,FNValue;
+		contFN = FNValue =  0;
 		String line = "";
 		String runLine = "";
 		String[] palavra = null;
@@ -101,20 +99,17 @@ public class DadosDao {
 				
 				runLine += line;
 				palavra = runLine.split("\t");
-				for(String role: regras){	
+				for (int i = 0; i < regras.size(); i++) {
 					for (int j = 0; j < palavra.length; j++) {
-						if(palavra[j].equals(role)){
-							contFN += pesos.get(contPeso); // Pega peso de cada regra encontrado
-							contPeso++;
+						if(palavra[j].equals(regras.get(i))){
+							contFN += pesos.get(i); // Pega peso de cada regra encontrado
 							if(palavra[palavra.length-1] == palavra[j]){
 								if(contFN <= 5){
 									FNValue++; // contador de todos os valores de Falso Positivos de cada linha
 									contFN =  0;
-									contPeso = 0;
 									break;
 								}else{
 									contFN =  0;
-									contPeso = 0;
 									break;
 								}
 							}
