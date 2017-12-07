@@ -15,6 +15,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Random;
 
+import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
+
 /**
  *
  * @author João Lola
@@ -128,6 +130,14 @@ public class AntiSpamFilterController {
 			spamCB.setSelected(false);
 		}
 	}
+	
+	
+	public void generateOptimizedConfiguration(){
+		
+		AntiSpamFilterAutomaticConfiguration anti = new AntiSpamFilterAutomaticConfiguration();
+		optFnLBL.setText(String.valueOf(20));
+		optFpLBL.setText(String.valueOf(100));
+	}
 
 	/**
 	 * Metodo loadHamSpamFile que chama metodos (readsHamFile e readSpamFile).
@@ -140,8 +150,8 @@ public class AntiSpamFilterController {
 		FPValue = dadosDao.readsHamFile(spamTF.getText(), regras, weights);
 		FNValue = dadosDao.readSpamFile(hamTF.getText(), regras, weights);
 		
-		System.out.println("FP ==> "+ FPValue +"\n\n");
-		System.out.println("FN ==> "+ FNValue +"\n\n");
+		fnLBL.setText(String.valueOf(FNValue));
+		fpLBL.setText(String.valueOf(FPValue));
 	}
 	
 	// Metodo para ler os ficheiros e carregar o ficheiro rules file para a list
@@ -154,13 +164,11 @@ public class AntiSpamFilterController {
 	public void loadFiles() {
 		DadosDao d = new DadosDao();
 		d.lerFicheiro(rulesTF.getText(), regras, weights);
-		
-		//System.out.println("Regras ===>" + regras + "\n\n\n");
-		// d.lerFicheiro(hamTF.getText(), regras);
-		// d.lerFicheiro(spamTF.getText(), regras);
+
 		rulesLV.setItems(regras);
 		weightsLV.setItems(weights);
 		weightCB.getItems().addAll(pesos);
+		optRulesLV.setItems(regras);
 		
 		if (weights.isEmpty())
 			loadContent();
@@ -177,7 +185,6 @@ public class AntiSpamFilterController {
 			weights.add(random.nextInt((pesoMax - pesoMin) + 1) + pesoMin);
 		}
 		weightsLV.setItems(weights);
-		//System.out.println("weights ===>" + weights + "\n");
 	}
 
 	public void editWeights() {
