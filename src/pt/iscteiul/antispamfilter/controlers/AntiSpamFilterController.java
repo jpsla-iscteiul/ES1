@@ -10,19 +10,18 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import pt.iscteiul.antispamfilter.AntiSpamFilterAutomaticConfiguration;
+import pt.iscteiul.antispamfilter.models.AntiSpamMethods;
+import pt.iscteiul.antispamfilter.models.TipoFicheiro;
 import pt.iscteiul.antispamfilter.models.dao.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.Random;
 
 /**
  *
  * @author João Lola
  * @author Délcio Pedro
  * 
- *
  */
 public class AntiSpamFilterController {
 
@@ -67,12 +66,13 @@ public class AntiSpamFilterController {
 	@FXML
 	private ListView<Double> optWeightsLV;
 	private ObservableList<String> regras = FXCollections.observableArrayList();
-	private ObservableList<Double> weights = FXCollections.observableArrayList();
-	private Double[] pesos = { -5.0, -4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0, 5.0 };
+	private ObservableList<Double> pesosRegras = FXCollections.observableArrayList();
+	private Double[] pesosChoiceBox = {-5.0, -4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0, 5.0 };
 
 	@FXML
 	void initialize() {
 
+		
 	}
 
 	@FXML
@@ -95,13 +95,13 @@ public class AntiSpamFilterController {
 	 * 
 	 * 
 	 */
+
+	//
 	public void saveConfiguration() throws FileNotFoundException {
 
 		PrintWriter fileWriterrulesTF = new PrintWriter(new File(rulesTF.getText()));
-
 		for (int i = 0; i < regras.size(); i++) {
-			fileWriterrulesTF.write(regras.get(i) + ";" + weights.get(i) + " ");
-			System.out.println(regras.get(i) + ";" + weights.get(i) + " ");
+			fileWriterrulesTF.write(regras.get(i) + ";" + pesosRegras.get(i) + " ");
 		}
 		fileWriterrulesTF.close();
 	}
@@ -142,22 +142,7 @@ public class AntiSpamFilterController {
 	/**
 	 * Metodo loadHamSpamFile que chama metodos (readsHamFile e readSpamFile).
 	 */
-	public void loadHamSpamFile() {
-
-		int FPValue;
-		int FNValue;
-		DadosDao dadosDao = new DadosDao();
-		FPValue = dadosDao.readsHamFile(hamTF.getText(), regras, weights);
-		FNValue = dadosDao.readSpamFile(spamTF.getText(), regras, weights);
-
-		System.out.println("FP ==> " + FPValue + "\n\n");
-		System.out.println("FN ==> " + FNValue + "\n\n");
-
-		fpLBL.setText(String.valueOf(FPValue));
-		fnLBL.setText(String.valueOf(FNValue));
-
-	}
-
+	
 	// Metodo para ler os ficheiros e carregar o ficheiro rules file para a list
 	// view rulesLV
 	/**
@@ -165,48 +150,46 @@ public class AntiSpamFilterController {
 	 * 
 	 * 
 	 */
+	public void ler() {
+		
+	}
 	public void loadFiles() {
-		DadosDao d = new DadosDao();
-		d.lerFicheiro(rulesTF.getText(), regras, weights);
-
-		// System.out.println("Regras ===>" + regras + "\n\n\n");
-		// d.lerFicheiro(hamTF.getText(), regras);
-		// d.lerFicheiro(spamTF.getText(), regras);
-
+		
+		DadosDao dadosRules = new DadosDao();
+		dadosRules.lerFicheiro(rulesTF.getText(), regras, pesosRegras, TipoFicheiro.Rules);
+		
 		rulesLV.setItems(regras);
-		weightsLV.setItems(weights);
-		weightCB.getItems().addAll(pesos);
-
+		weightsLV.setItems(pesosRegras);
+		weightCB.getItems().addAll(pesosChoiceBox);
 		optRulesLV.setItems(regras);
 
-		if (weights.isEmpty())
-			loadContent();
-		loadHamSpamFile();
-
-	}
-
-	// Carregar o conteudo da primeira ListView
-	private void loadContent() {
-
-		Random random = new Random();
-		double pesoMin = -5.1;
-		double pesoMax = 5.1;
-		for (int i = 0; i < regras.size(); i++) {
-
-			weights.addAll(random.nextDouble() * (pesoMax - pesoMin) + pesoMin);
-
+		if (pesosRegras.isEmpty()) {
+			AntiSpamMethods.gerarPesos(regras, pesosRegras);
+			weightsLV.setItems(pesosRegras);	
 		}
-		weightsLV.setItems(weights);
-
-		System.out.println("weights ===>" + weights + "\n");
-
+		
 	}
-
 	public void editWeights() {
 
 		double peso = (Double) weightCB.getSelectionModel().getSelectedItem();
 		int position = weightsLV.getSelectionModel().getSelectedIndex();
-		weights.set(position, peso);
-		weightsLV.setItems(weights);
+		pesosRegras.set(position, peso);
+		weightsLV.setItems(pesosRegras);
 	}
+
+	
+	public void filterEvaluation() {
+
+		ObservableList<String> regraSpam = FXCollections.observableArrayList();
+		DadosDao dadosSpam = new DadosDao();
+		dadosSpam.lerFicheiro(spamTF.getText(), regraSpam, pesosRegras, TipoFicheiro.Spam);
+		AntiSpamMethods.calcularFpEFn(regras, regraSpam, pesosRegras, TipoFicheiro.Spam);
+		fpLBL.setText(String.valueOf(AntiSpamMethods.falsoPositivo));
+		
+		ObservableList<String> regrasHam = FXCollections.observableArrayList();
+		DadosDao dadosHam = new DadosDao();
+		dadosHam.lerFicheiro(hamTF.getText(), regrasHam, pesosRegras, TipoFicheiro.Ham);
+		AntiSpamMethods.calcularFpEFn(regras, regrasHam, pesosRegras, TipoFicheiro.Ham);
+		fnLBL.setText(String.valueOf(AntiSpamMethods.falsoNegativo));
+		}
 }
