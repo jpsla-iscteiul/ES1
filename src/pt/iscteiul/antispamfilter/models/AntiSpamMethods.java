@@ -58,7 +58,7 @@ public abstract class AntiSpamMethods {
 						}catch (InterruptedException e) {
 						  e.printStackTrace(); 
 						}*/
-					if (somaPesos <= -5) {
+					if (somaPesos <= 5) {
 					falsoNegativo++;
 					/*System.out.println("\\n");
 					System.out.println("Valor total da soma "+ somaPesos);

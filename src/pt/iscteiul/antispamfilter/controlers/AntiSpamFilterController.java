@@ -71,6 +71,7 @@ public class AntiSpamFilterController {
 
 	@FXML
 	void initialize() {
+	
 
 		
 	}
