@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
@@ -12,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.iscteiul.antispamfilter.controlers.AntiSpamFilterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.iscteiul.antispamfilter.controlers.AntiSpamFilterController">
    <children>
       <Pane prefHeight="227.0" prefWidth="880.0">
          <children>
@@ -48,7 +46,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="669.0" layoutY="98.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Evaluation" textAlignment="CENTER" wrapText="true" />
+            <Button layoutX="669.0" layoutY="98.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadHamSpamFile" prefHeight="25.0" prefWidth="82.0" text="Evaluation" textAlignment="CENTER" wrapText="true" />
             <Label layoutX="32.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="45.0" text="Nº FP:" />
             <Label fx:id="fpLBL" layoutX="78.0" layoutY="260.0" prefHeight="20.0" prefWidth="45.0" />
             <Label layoutX="123.0" layoutY="260.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="50.0" text="Nº FN:" />
@@ -61,7 +59,7 @@
       </Pane>
       <Pane layoutX="1.0" layoutY="550.0" prefHeight="340.0" prefWidth="880.0">
          <children>
-            <Button layoutX="672.0" layoutY="106.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="190.0" text="Generate Optimized Configuration" textAlignment="CENTER" wrapText="true" />
+            <Button layoutX="672.0" layoutY="106.0" mnemonicParsing="false" onAction="#generateOptimizedConfiguration" prefHeight="57.0" prefWidth="190.0" text="Generate Optimized Configuration" textAlignment="CENTER" wrapText="true" />
             <ListView fx:id="optRulesLV" layoutX="30.0" layoutY="53.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="300.0" />
             <Label layoutX="213.0" layoutY="14.0" prefHeight="27.0" prefWidth="231.0" text="Rule&amp;Weight Optimized List" textAlignment="CENTER">
                <font>

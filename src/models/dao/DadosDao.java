@@ -8,11 +8,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
+
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;;
 
 //Classe para ler os ficheiros 
 public class DadosDao {
-		
+	public ObservableList<String> listHam = FXCollections.observableArrayList();
+	public ObservableList<String> listSpam = FXCollections.observableArrayList();
+	public int FN = 0;
+	public int FP = 0;
 	/**
 	 * 	
 	 * @param spamFile
@@ -20,9 +25,10 @@ public class DadosDao {
 	 * @param pesos
 	 * @return FNValue (retorna a somatória de números de Falso Negativo)
 	 */
-	public int readsHamFile(String spamFile,ObservableList<String> regras, ObservableList<Integer> pesos){
-		int contFP, FPValue;
-		contFP = FPValue = 0;
+	public void readsHamSpamFile(String spamFile,String hamFile,ObservableList<String> regras, ObservableList<Integer> pesos){
+		int contFP, FPValue,contFN;
+		contFP = FPValue = contFN = 0;
+
 		String line = "";
 		String runLine = "";
 		String[] palavra = null;
@@ -33,20 +39,18 @@ public class DadosDao {
 		try {
 			FileReader fileReader = new FileReader(spamFile);
 			BufferedReader readFile = new BufferedReader(fileReader);
-			
 			line = readFile.readLine();
-			
 			while (line != null) {
-				
 				runLine += line;
 				palavra = runLine.split("\t");
-				for (int i = 0; i < regras.size(); i++) {
-					for (int j = 0; j < palavra.length; j++) {
+				listSpam.add(line);
+				for (int j = 0; j < palavra.length; j++) {
+					for (int i = 0; i < regras.size(); i++) {
 						if(palavra[j].equals(regras.get(i))){
 							contFP += pesos.get(i); // Pega peso de cada regra encontrado
 							if(palavra[palavra.length-1] == palavra[j]){
-								if(contFP > 5){
-									FPValue++; // contador de todos os valores de Falso Positivos de cada linha
+								if(contFP >= 5){
+									this.FP++; // contador de todos os valores de Falso Positivos de cada linha
 									contFP =  0;
 									break;
 								}else{
@@ -63,45 +67,28 @@ public class DadosDao {
 		} catch (Exception e) {
 			System.out.println("Ficheiro não encontrado!");
 		}
-		return FPValue;
-	}
-	
-	
-	/**
-	 * 
-	 * @param hamFile
-	 * @param regras
-	 * @param pesos
-	 * @return FNValue (retorna a somatória de números de Falso Positivo)
-	 */
-	public int readSpamFile(String hamFile,ObservableList<String> regras, ObservableList<Integer> pesos){
-		int contFN,FNValue;
-		contFN = FNValue =  0;
-		String line = "";
-		String runLine = "";
-		String[] palavra = null;
-
 		
 		/**
 		 * Lê ficheiro de spam.log para calcular a somatória de números de Falso Positivo
 		 */
+		line = "";
+		runLine = "";
+		palavra = null;
 		try {
 			FileReader fileReader = new FileReader(hamFile);
 			BufferedReader readFile = new BufferedReader(fileReader);
-			
 			line = readFile.readLine();
-			
 			while (line != null) {
-				
 				runLine += line;
 				palavra = runLine.split("\t");
-				for (int i = 0; i < regras.size(); i++) {
-					for (int j = 0; j < palavra.length; j++) {
+				listHam.add(line);
+				for (int j = 0; j < palavra.length; j++) {
+					for (int i = 0; i < regras.size(); i++) {
 						if(palavra[j].equals(regras.get(i))){
 							contFN += pesos.get(i); // Pega peso de cada regra encontrado
 							if(palavra[palavra.length-1] == palavra[j]){
-								if(contFN <= 5){
-									FNValue++; // contador de todos os valores de Falso Positivos de cada linha
+								if(contFN < 5){
+									this.FN++; // contador de todos os valores de Falso Positivos de cada linha
 									contFN =  0;
 									break;
 								}else{
@@ -118,8 +105,8 @@ public class DadosDao {
 		} catch (Exception e) {
 			System.out.println("Ficheiro não encontrado!");
 		}
-		return FNValue;
 	}
+	
 
 	/**
 	 * 
