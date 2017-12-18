@@ -138,12 +138,12 @@ public class AntiSpamFilterController {
 
 		String[] args = null;
 		float FN, FP;
-		ObservableList<String> listWights = FXCollections.observableArrayList();
-		listWights = AntiSpamMethods.listWights;
+		ObservableList<String> weightsList = FXCollections.observableArrayList();
+		weightsList = AntiSpamMethods.weightsList;
 		FN = AntiSpamMethods.FNValue;
 		FP = AntiSpamMethods.FPValue;
 		AntiSpamFilterAutomaticConfiguration.main(args, regras, pesosRegras, spamTF.getText(), hamTF.getText());
-		optWeightsLV.setItems(listWights);	
+		optWeightsLV.setItems(weightsList);	
 		optFnLBL.setText(String.valueOf(FN));
 		optFpLBL.setText(String.valueOf(FP));
 //		System.out.println("FN == " + FN + " FP == " + FP +"\n");

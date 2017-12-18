@@ -2,13 +2,8 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-<<<<<<< HEAD
-  <date>2017-12-18T08:29:25</date>
-  <millis>1513585765501</millis>
-=======
-  <date>2017-12-15T19:17:50</date>
-  <millis>1513365470232</millis>
->>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
+  <date>2017-12-18T21:06:19</date>
+  <millis>1513631179389</millis>
   <sequence>0</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -18,13 +13,8 @@
   <message>Loggers configured with null</message>
 </record>
 <record>
-<<<<<<< HEAD
-  <date>2017-12-18T08:29:25</date>
-  <millis>1513585765521</millis>
-=======
-  <date>2017-12-15T19:17:50</date>
-  <millis>1513365470328</millis>
->>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
+  <date>2017-12-18T21:06:19</date>
+  <millis>1513631179397</millis>
   <sequence>1</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -34,13 +24,8 @@
   <message>ExecuteAlgorithms: Preparing output directory</message>
 </record>
 <record>
-<<<<<<< HEAD
-  <date>2017-12-18T08:29:25</date>
-  <millis>1513585765532</millis>
-=======
-  <date>2017-12-15T19:17:50</date>
-  <millis>1513365470347</millis>
->>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
+  <date>2017-12-18T21:06:19</date>
+  <millis>1513631179403</millis>
   <sequence>2</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -50,13 +35,8 @@
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 0, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN0.tsv</message>
 </record>
 <record>
-<<<<<<< HEAD
-  <date>2017-12-18T08:29:29</date>
-  <millis>1513585769009</millis>
-=======
-  <date>2017-12-15T19:17:51</date>
-  <millis>1513365471840</millis>
->>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
+  <date>2017-12-18T21:06:20</date>
+  <millis>1513631180987</millis>
   <sequence>3</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -66,13 +46,8 @@
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 1, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN1.tsv</message>
 </record>
 <record>
-<<<<<<< HEAD
-  <date>2017-12-18T08:29:31</date>
-  <millis>1513585771906</millis>
-=======
-  <date>2017-12-15T19:17:52</date>
-  <millis>1513365472618</millis>
->>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
+  <date>2017-12-18T21:06:22</date>
+  <millis>1513631182354</millis>
   <sequence>4</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -81,10 +56,9 @@
   <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 2, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN2.tsv</message>
 </record>
-<<<<<<< HEAD
 <record>
-  <date>2017-12-18T08:29:34</date>
-  <millis>1513585774940</millis>
+  <date>2017-12-18T21:06:23</date>
+  <millis>1513631183824</millis>
   <sequence>5</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -94,8 +68,8 @@
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 3, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN3.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T08:29:37</date>
-  <millis>1513585777698</millis>
+  <date>2017-12-18T21:06:25</date>
+  <millis>1513631185074</millis>
   <sequence>6</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -105,8 +79,8 @@
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 4, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN4.tsv</message>
 </record>
 <record>
-  <date>2017-12-18T08:29:40</date>
-  <millis>1513585780637</millis>
+  <date>2017-12-18T21:06:26</date>
+  <millis>1513631186389</millis>
   <sequence>7</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -116,8 +90,8 @@
   <message>Computing indicator: HV</message>
 </record>
 <record>
-  <date>2017-12-18T08:29:40</date>
-  <millis>1513585780638</millis>
+  <date>2017-12-18T21:06:26</date>
+  <millis>1513631186389</millis>
   <sequence>8</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -127,8 +101,8 @@
   <message>RF: experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.rf</message>
 </record>
 <record>
-  <date>2017-12-18T08:29:40</date>
-  <millis>1513585780645</millis>
+  <date>2017-12-18T21:06:26</date>
+  <millis>1513631186393</millis>
   <sequence>9</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -138,8 +112,8 @@
   <message>File experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/HV exist.</message>
 </record>
 <record>
-  <date>2017-12-18T08:29:40</date>
-  <millis>1513585780647</millis>
+  <date>2017-12-18T21:06:26</date>
+  <millis>1513631186394</millis>
   <sequence>10</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -149,8 +123,8 @@
   <message>File experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/HV is a file. Deleting file.</message>
 </record>
 <record>
-  <date>2017-12-18T08:29:40</date>
-  <millis>1513585780655</millis>
+  <date>2017-12-18T21:06:26</date>
+  <millis>1513631186395</millis>
   <sequence>11</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -160,60 +134,57 @@
   <message>File succesfully deleted.</message>
 </record>
 <record>
-  <date>2017-12-18T08:29:40</date>
-  <millis>1513585780662</millis>
+  <date>2017-12-18T21:06:26</date>
+  <millis>1513631186398</millis>
   <sequence>12</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
   <thread>13</thread>
-  <message>HV: 0.7728207927443735</message>
+  <message>HV: 0.6733271705894901</message>
 </record>
 <record>
-  <date>2017-12-18T08:29:40</date>
-  <millis>1513585780675</millis>
+  <date>2017-12-18T21:06:26</date>
+  <millis>1513631186401</millis>
   <sequence>13</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
   <thread>13</thread>
-  <message>HV: 0.7050302317769568</message>
+  <message>HV: 0.5556069117542487</message>
 </record>
 <record>
-  <date>2017-12-18T08:29:40</date>
-  <millis>1513585780679</millis>
+  <date>2017-12-18T21:06:26</date>
+  <millis>1513631186403</millis>
   <sequence>14</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
   <thread>13</thread>
-  <message>HV: 0.6878569029224051</message>
+  <message>HV: 0.6636564033278818</message>
 </record>
 <record>
-  <date>2017-12-18T08:29:40</date>
-  <millis>1513585780684</millis>
+  <date>2017-12-18T21:06:26</date>
+  <millis>1513631186405</millis>
   <sequence>15</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
   <thread>13</thread>
-  <message>HV: 0.6664427275780986</message>
+  <message>HV: 0.5772950295100618</message>
 </record>
 <record>
-  <date>2017-12-18T08:29:40</date>
-  <millis>1513585780688</millis>
+  <date>2017-12-18T21:06:26</date>
+  <millis>1513631186407</millis>
   <sequence>16</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.util.experiment.component.ComputeQualityIndicators</class>
   <method>run</method>
   <thread>13</thread>
-  <message>HV: 0.7279979845482029</message>
+  <message>HV: 0.7029794496195692</message>
 </record>
-</log>
-=======
->>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
