@@ -2,8 +2,13 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
+<<<<<<< HEAD
   <date>2017-12-18T08:29:25</date>
   <millis>1513585765501</millis>
+=======
+  <date>2017-12-15T19:17:50</date>
+  <millis>1513365470232</millis>
+>>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
   <sequence>0</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -13,8 +18,13 @@
   <message>Loggers configured with null</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2017-12-18T08:29:25</date>
   <millis>1513585765521</millis>
+=======
+  <date>2017-12-15T19:17:50</date>
+  <millis>1513365470328</millis>
+>>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
   <sequence>1</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -24,8 +34,13 @@
   <message>ExecuteAlgorithms: Preparing output directory</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2017-12-18T08:29:25</date>
   <millis>1513585765532</millis>
+=======
+  <date>2017-12-15T19:17:50</date>
+  <millis>1513365470347</millis>
+>>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
   <sequence>2</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -35,8 +50,13 @@
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 0, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN0.tsv</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2017-12-18T08:29:29</date>
   <millis>1513585769009</millis>
+=======
+  <date>2017-12-15T19:17:51</date>
+  <millis>1513365471840</millis>
+>>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
   <sequence>3</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -46,8 +66,13 @@
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 1, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN1.tsv</message>
 </record>
 <record>
+<<<<<<< HEAD
   <date>2017-12-18T08:29:31</date>
   <millis>1513585771906</millis>
+=======
+  <date>2017-12-15T19:17:52</date>
+  <millis>1513365472618</millis>
+>>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
   <sequence>4</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -56,6 +81,7 @@
   <thread>13</thread>
   <message> Running algorithm: NSGAII, problem: AntiSpamFilterProblem, run: 2, funFile: experimentBaseDirectory/AntiSpamStudy/data/NSGAII/AntiSpamFilterProblem/FUN2.tsv</message>
 </record>
+<<<<<<< HEAD
 <record>
   <date>2017-12-18T08:29:34</date>
   <millis>1513585774940</millis>
@@ -189,3 +215,5 @@
   <message>HV: 0.7279979845482029</message>
 </record>
 </log>
+=======
+>>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git

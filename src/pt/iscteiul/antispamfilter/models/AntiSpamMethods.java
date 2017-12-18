@@ -55,6 +55,7 @@ public abstract class AntiSpamMethods {
 				}
 			} else {
 				if (i > 0) {
+<<<<<<< HEAD
 					if(tipo.equals(TipoFicheiro.Spam)) {
 						if (somaPesos >= 5) {
 							falsoPositivo++;
@@ -72,6 +73,33 @@ public abstract class AntiSpamMethods {
 						}
 					}
 				}
+=======
+				if(tipo.equals(TipoFicheiro.Spam)) {
+					if (somaPesos > 5) {
+						falsoPositivo++;
+						somaPesos = 0;
+			}else {
+			somaPesos = 0;
+			}
+		} 	
+				if(tipo.equals(TipoFicheiro.Ham)) {
+					/*try {
+						  Thread.sleep(4000);// pausa de 2000 milisegundos
+						}catch (InterruptedException e) {
+						  e.printStackTrace(); 
+						}*/
+					if (somaPesos <= 5) {
+					falsoNegativo++;
+					/*System.out.println("\\n");
+					System.out.println("Valor total da soma "+ somaPesos);
+					System.out.println("\\n");
+					System.out.println("Falsos negativos: " + falsoNegativo);
+					System.out.println("\\n");
+						*/
+			somaPesos = 0;
+			}else {
+				somaPesos = 0;
+>>>>>>> branch 'Evaluation_Delcio' of https://github.com/jpsla-iscteiul/ES1-2017-METIA1-44.git
 			}
 		}
 	}
