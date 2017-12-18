@@ -15,6 +15,7 @@ import pt.iscteiul.antispamfilter.models.TipoFicheiro;
 import pt.iscteiul.antispamfilter.models.dao.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
@@ -64,11 +65,11 @@ public class AntiSpamFilterController {
 	@FXML
 	private ListView<String> optRulesLV;
 	@FXML
-	private ListView<Double> optWeightsLV;
-	private ObservableList<String> regras = FXCollections.observableArrayList();
+	private ListView<String> optWeightsLV;
+	public ObservableList<String> regras = FXCollections.observableArrayList();
 	private ObservableList<Double> pesosRegras = FXCollections.observableArrayList();
 	private Double[] pesosChoiceBox = {-5.0, -4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0, 5.0 };
-
+	
 	@FXML
 	void initialize() {
 
@@ -132,16 +133,20 @@ public class AntiSpamFilterController {
 		}
 	}
 
-	public void generateOptimizedConfiguration() {
+	public void generateOptimizedConfiguration() throws IOException {
 
-		AntiSpamFilterAutomaticConfiguration anti = new AntiSpamFilterAutomaticConfiguration();
-		optFnLBL.setText(String.valueOf(20));
-		optFpLBL.setText(String.valueOf(100));
+		String[] args = null;
+		float FN, FP;
+		ObservableList<String> listWights = FXCollections.observableArrayList();
+		listWights = AntiSpamMethods.listWights;
+		FN = AntiSpamMethods.FNValue;
+		FP = AntiSpamMethods.FPValue;
+		AntiSpamFilterAutomaticConfiguration.main(args, regras, pesosRegras, spamTF.getText(), hamTF.getText());
+		optWeightsLV.setItems(listWights);	
+		optFnLBL.setText(String.valueOf(FN));
+		optFpLBL.setText(String.valueOf(FP));
+//		System.out.println("FN == " + FN + " FP == " + FP +"\n");
 	}
-
-	/**
-	 * Metodo loadHamSpamFile que chama metodos (readsHamFile e readSpamFile).
-	 */
 	
 	// Metodo para ler os ficheiros e carregar o ficheiro rules file para a list
 	// view rulesLV
@@ -191,5 +196,6 @@ public class AntiSpamFilterController {
 		dadosHam.lerFicheiro(hamTF.getText(), regrasHam, pesosRegras, TipoFicheiro.Ham);
 		AntiSpamMethods.calcularFpEFn(regras, regrasHam, pesosRegras, TipoFicheiro.Ham);
 		fnLBL.setText(String.valueOf(AntiSpamMethods.falsoNegativo));
+		AntiSpamMethods.listaOptimizado();		
 		}
 }

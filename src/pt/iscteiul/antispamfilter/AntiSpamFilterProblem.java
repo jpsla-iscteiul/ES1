@@ -6,11 +6,33 @@ import java.util.List;
 import org.uma.jmetal.problem.impl.AbstractDoubleProblem;
 import org.uma.jmetal.solution.DoubleSolution;
 
-public class AntiSpamFilterProblem extends AbstractDoubleProblem {
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import pt.iscteiul.antispamfilter.models.AntiSpamMethods;
+import pt.iscteiul.antispamfilter.models.TipoFicheiro;
+import pt.iscteiul.antispamfilter.models.dao.DadosDao;
 
-	  public AntiSpamFilterProblem() {
+public class AntiSpamFilterProblem extends AbstractDoubleProblem {
+	
+	public ObservableList<String> regras = FXCollections.observableArrayList();
+	public ObservableList<Double> pesosRegras = FXCollections.observableArrayList();
+	public String spamTF;
+	public String hamTF;
+
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+	public AntiSpamFilterProblem(ObservableList<String> regras,
+			ObservableList<Double> pesosRegras,String spamTF,String hamTF) {
 	    // Número de regras para gerar pesos e falsos postivos e negativos
-	    this(10);
+	    this(335);
+	    this.regras = regras;
+	    this.pesosRegras = pesosRegras;
+	    this.spamTF = spamTF;
+	    this.hamTF = hamTF;
 	  }
 
 	  public AntiSpamFilterProblem(Integer numberOfVariables) {
@@ -36,31 +58,27 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	   * 
 	   */
 	  public void evaluate(DoubleSolution solution){
-	    //double aux, xi, xj;
-	    //double[] fx = new double[getNumberOfObjectives()];
+		  
+	    double[] fx = new double[getNumberOfObjectives()];
 	    double[] x = new double[getNumberOfVariables()];
+	    ObservableList<String> regraSpam = FXCollections.observableArrayList();
+	    ObservableList<String> regraHam = FXCollections.observableArrayList();   
+	    
 	    /*Extracao do vetor de pesos do objecto solution*/
 	    for (int i = 0; i < solution.getNumberOfVariables(); i++) {
 	      x[i] = solution.getVariableValue(i) ;
 	    }
 	    
-	    //Dica criar uma função que calcula o numero de falos potivos e negativos e invoca-la aqui
-	    
-	    // Código tem de ser substituido
-//	    fx[0] = 0.0;
-//	    for (int var = 0; var < solution.getNumberOfVariables() - 1; var++) {
-//		  fx[0] += Math.abs(x[0]); // Example for testing
-//	    }
-//	    
-//	    fx[1] = 0.0;
-//	    for (int var = 0; var < solution.getNumberOfVariables(); var++) {
-//	    	fx[1] += Math.abs(x[1]); // Example for testing
-//	    }
-	    int FP=0, FN=0;
+	    DadosDao dadosSpam = new DadosDao();
+	    dadosSpam.lerFicheiro(spamTF, regraSpam, pesosRegras, TipoFicheiro.Spam);
+	    AntiSpamMethods.calcularFpEFnAutomantico(this.regras, regraSpam, x, TipoFicheiro.Spam, fx);
 	    
 	    
-		
-	    solution.setObjective(0, FP/*fx[0]*/);
-	    solution.setObjective(1, FN/*fx[1]*/);
+	    DadosDao dadosHam = new DadosDao();
+	    dadosHam.lerFicheiro(hamTF, regraHam, pesosRegras, TipoFicheiro.Ham);
+	    AntiSpamMethods.calcularFpEFnAutomantico(this.regras, regraHam, x, TipoFicheiro.Ham,fx);
+
+	    solution.setObjective(0, fx[0]);   //FP
+	    solution.setObjective(1, fx[1]);   //FN
 	  }
 	}
