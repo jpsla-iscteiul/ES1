@@ -1,4 +1,4 @@
-package pt.iscteiul.antispamfilter;
+package antiSpamFilter;
 
 import org.uma.jmetal.algorithm.Algorithm;
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder;
@@ -22,7 +22,7 @@ import java.util.List;
 public class AntiSpamFilterAutomaticConfiguration {
   private static final int INDEPENDENT_RUNS = 5 ;
   //Mudar nome para nome mais desejavel.
-  public static void main(String[] args,ObservableList<String> regras,
+  public static void automaticConfiguration(String[] args,ObservableList<String> regras,
 		  ObservableList<Double> pesosRegras, String spamTF, String hamTF) throws IOException {
     String experimentBaseDirectory = "experimentBaseDirectory";
 
