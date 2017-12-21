@@ -28,9 +28,10 @@ import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
  * <li>Três checkBoxs que permitem selecionar o tipo de ficheiro a carregar,
  * como exemplo a spamCB para carregar um ficheiro Spam
  * <li>Quatro textfields para receberem textos
- * <li>Quatro labels onde são adicionados os valores dos 
- * falsos positivos e falsos negativos de ambas configurações
+ * <li>Quatro labels onde são adicionados os valores dos falsos positivos e
+ * falsos negativos de ambas configurações
  * <li>
+ * 
  * @author João Lola 83169 Délcio Pedro 81611
  * 
  * 
@@ -71,8 +72,6 @@ public class AntiSpamFilterController {
 	private ListView<String> optWeightsLV;
 	private ObservableList<String> regras = FXCollections.observableArrayList();
 	private ObservableList<Double> pesosRegras = FXCollections.observableArrayList();
-	//private ObservableList<String> regrasAuto = FXCollections.observableArrayList();
-	//private ObservableList<Double> pesosRegrasAuto = FXCollections.observableArrayList();
 
 	@FXML
 	void initialize() {
@@ -136,7 +135,6 @@ public class AntiSpamFilterController {
 		}
 	}
 
-	
 	public void filterEvaluation() {
 
 		ObservableList<String> regraSpam = FXCollections.observableArrayList();
@@ -152,7 +150,6 @@ public class AntiSpamFilterController {
 		fnLBL.setText(String.valueOf(AntiSpamMethods.falsoNegativo));
 	}
 
-	
 	public void generateOptimizedConfiguration() throws IOException {
 
 		String[] args = null;
@@ -165,7 +162,6 @@ public class AntiSpamFilterController {
 		optFpLBL.setText(String.valueOf(AntiSpamMethods.falsoPositivoAuto));
 	}
 
-	
 	public void saveConfiguration() throws FileNotFoundException {
 
 		PrintWriter fileWriterrulesTF = new PrintWriter(new File(rulesTF.getText()));
@@ -173,9 +169,13 @@ public class AntiSpamFilterController {
 			fileWriterrulesTF.write(regras.get(i) + ";" + pesosRegras.get(i) + " ");
 		}
 		fileWriterrulesTF.close();
+
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText("A configuração foi salva com sucesso no ficheiro.");
+		alert.showAndWait();
+
 	}
 
-	
 	public void overwriteSavedConfiguration() throws FileNotFoundException {
 
 		PrintWriter fileWriterrules = new PrintWriter(new File(rulesTF.getText()));
@@ -183,5 +183,9 @@ public class AntiSpamFilterController {
 			fileWriterrules.write(regras.get(i) + ";" + AntiSpamMethods.pesosListView.get(i) + " ");
 		}
 		fileWriterrules.close();
+
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText("A configuração foi salva com sucesso no ficheiro.");
+		alert.showAndWait();
 	}
 }

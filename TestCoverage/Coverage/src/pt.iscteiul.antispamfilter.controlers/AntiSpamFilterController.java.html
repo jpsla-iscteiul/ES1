@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AntiSpamFilterController.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ES1-2017 (21/12/2017 11:29:45)</a> &gt; <a href="../../index.html" class="el_group">ES1-2017</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">pt.iscteiul.antispamfilter.controlers</a> &gt; <span class="el_source">AntiSpamFilterController.java</span></div><h1>AntiSpamFilterController.java</h1><pre class="source lang-java linenums">package pt.iscteiul.antispamfilter.controlers;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.FileChooser;
+import pt.iscteiul.antispamfilter.models.AntiSpamMethods;
+import pt.iscteiul.antispamfilter.models.TipoFicheiro;
+import pt.iscteiul.antispamfilter.models.dao.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
+
+/**
+ * Classe controladora da GUI Main View (Interface gráfica)
+ * &lt;p&gt;
+ * Esta classe contém:
+ * &lt;ul&gt;
+ * &lt;li&gt;Três checkBoxs que permitem selecionar o tipo de ficheiro a carregar,
+ * como exemplo a spamCB para carregar um ficheiro Spam
+ * &lt;li&gt;Quatro textfields para receberem textos
+ * &lt;li&gt;Quatro labels onde são adicionados os valores dos falsos positivos e
+ * falsos negativos de ambas configurações
+ * &lt;li&gt;
+ * 
+ * @author João Lola 83169 Délcio Pedro 81611
+ * 
+ * 
+ */
+<span class="nc" id="L39">public class AntiSpamFilterController {</span>
+
+	@FXML
+	private CheckBox rulesCB;
+	@FXML
+	private CheckBox spamCB;
+	@FXML
+	private CheckBox hamCB;
+	@FXML
+	private TextField weightsTF;
+	@FXML
+	private TextField rulesTF;
+	@FXML
+	private TextField spamTF;
+	@FXML
+	private TextField hamTF;
+
+	@FXML
+	private Label fpLBL;
+	@FXML
+	private Label fnLBL;
+	@FXML
+	private Label optFpLBL;
+	@FXML
+	private Label optFnLBL;
+
+	@FXML
+	private ListView&lt;String&gt; rulesLV;
+	@FXML
+	private ListView&lt;Double&gt; weightsLV;
+	@FXML
+	private ListView&lt;String&gt; optRulesLV;
+	@FXML
+	private ListView&lt;String&gt; optWeightsLV;
+	/*private ObservableList&lt;String&gt; regras = FXCollections.observableArrayList();
+	private ObservableList&lt;Double&gt; pesosRegras = FXCollections.observableArrayList();
+
+	@FXML
+	void initialize() {
+
+	}
+
+	@FXML
+	public void browse() {
+
+		FileChooser fc = new FileChooser();
+		File selectedFile = fc.showOpenDialog(null);
+		if (selectedFile == null) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText(&quot; Operação cancelada!! &quot;);
+			alert.showAndWait();
+
+		} else {
+			String path = selectedFile.getPath();
+			if (rulesCB.isSelected()) {
+				rulesTF.setText(path);
+				rulesCB.setSelected(false);
+			}
+			if (hamCB.isSelected()) {
+				hamTF.setText(path);
+				hamCB.setSelected(false);
+			}
+			if (spamCB.isSelected()) {
+				spamTF.setText(path);
+				spamCB.setSelected(false);
+			}
+		}
+	}
+
+	public void loadFiles() {
+
+		DadosDao dadosRules = new DadosDao();
+		dadosRules.lerFicheiro(rulesTF.getText(), regras, pesosRegras, TipoFicheiro.Rules);
+
+		rulesLV.setItems(regras);
+		weightsLV.setItems(pesosRegras);
+		optRulesLV.setItems(regras);
+
+		if (pesosRegras.isEmpty()) {
+			AntiSpamMethods.gerarPesos(regras, pesosRegras);
+			weightsLV.setItems(pesosRegras);
+		}
+
+	}
+
+	public void editWeights() {
+
+		double peso = Double.parseDouble(weightsTF.getText());
+		int position = weightsLV.getSelectionModel().getSelectedIndex();
+		if (peso &gt; -6 &amp;&amp; peso &lt; 6) {
+			pesosRegras.set(position, peso);
+			weightsLV.setItems(pesosRegras);
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText(&quot;Erro! Apenas valores entre -6 e 6 exclusive!!!&quot;);
+			alert.showAndWait();
+		}
+	}
+
+	public void filterEvaluation() {
+
+		ObservableList&lt;String&gt; regraSpam = FXCollections.observableArrayList();
+		DadosDao dadosSpam = new DadosDao();
+		dadosSpam.lerFicheiro(spamTF.getText(), regraSpam, pesosRegras, TipoFicheiro.Spam);
+		AntiSpamMethods.calcularFpEFn(regras, regraSpam, pesosRegras, TipoFicheiro.Spam, null, null);
+		fpLBL.setText(String.valueOf(AntiSpamMethods.falsoPositivo));
+
+		ObservableList&lt;String&gt; regrasHam = FXCollections.observableArrayList();
+		DadosDao dadosHam = new DadosDao();
+		dadosHam.lerFicheiro(hamTF.getText(), regrasHam, pesosRegras, TipoFicheiro.Ham);
+		AntiSpamMethods.calcularFpEFn(regras, regrasHam, pesosRegras, TipoFicheiro.Ham, null, null);
+		fnLBL.setText(String.valueOf(AntiSpamMethods.falsoNegativo));
+	}
+
+	public void generateOptimizedConfiguration() throws IOException {
+
+		String[] args = null;
+		AntiSpamFilterAutomaticConfiguration.automaticConfiguration(args, regras, pesosRegras, spamTF.getText(),
+				hamTF.getText());
+
+		AntiSpamMethods.pesosOptimizados(regras);
+		optWeightsLV.setItems(AntiSpamMethods.pesosListView);
+		optFnLBL.setText(String.valueOf(AntiSpamMethods.falsoNegativoAuto));
+		optFpLBL.setText(String.valueOf(AntiSpamMethods.falsoPositivoAuto));
+	}
+
+	public void saveConfiguration() throws FileNotFoundException {
+
+		PrintWriter fileWriterrulesTF = new PrintWriter(new File(rulesTF.getText()));
+		for (int i = 0; i &lt; regras.size(); i++) {
+			fileWriterrulesTF.write(regras.get(i) + &quot;;&quot; + pesosRegras.get(i) + &quot; &quot;);
+		}
+		fileWriterrulesTF.close();
+
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(&quot;A configuração foi salva com sucesso no ficheiro.&quot;);
+		alert.showAndWait();
+
+	}
+
+	public void overwriteSavedConfiguration() throws FileNotFoundException {
+
+		PrintWriter fileWriterrules = new PrintWriter(new File(rulesTF.getText()));
+		for (int i = 0; i &lt; regras.size(); i++) {
+			fileWriterrules.write(regras.get(i) + &quot;;&quot; + AntiSpamMethods.pesosListView.get(i) + &quot; &quot;);
+		}
+		fileWriterrules.close();
+
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(&quot;A configuração foi salva com sucesso no ficheiro.&quot;);
+		alert.showAndWait();
+	}*/
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>ES1-2017 (21/12/2017 11:29:45)</div></body></html>

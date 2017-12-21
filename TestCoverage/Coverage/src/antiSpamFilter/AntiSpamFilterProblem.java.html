@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AntiSpamFilterProblem.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ES1-2017 (21/12/2017 11:29:45)</a> &gt; <a href="../../index.html" class="el_group">ES1-2017</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">antiSpamFilter</a> &gt; <span class="el_source">AntiSpamFilterProblem.java</span></div><h1>AntiSpamFilterProblem.java</h1><pre class="source lang-java linenums">package antiSpamFilter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.uma.jmetal.problem.impl.AbstractDoubleProblem;
+import org.uma.jmetal.solution.DoubleSolution;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import pt.iscteiul.antispamfilter.models.AntiSpamMethods;
+import pt.iscteiul.antispamfilter.models.TipoFicheiro;
+import pt.iscteiul.antispamfilter.models.dao.DadosDao;
+
+public class AntiSpamFilterProblem extends AbstractDoubleProblem {
+	
+<span class="nc" id="L17">	public ObservableList&lt;String&gt; regras = FXCollections.observableArrayList();</span>
+<span class="nc" id="L18">	public ObservableList&lt;Double&gt; pesosRegrasAuto = FXCollections.observableArrayList();</span>
+	public String ficheiroSpam;
+	public String ficheiroHam;
+	private static final long serialVersionUID = 1L;
+
+
+<span class="nc" id="L24">	public AntiSpamFilterProblem(ObservableList&lt;String&gt; regras,</span>
+			ObservableList&lt;Double&gt; pesosRegras, String ficheiroSpam, String ficheiroHam) {
+	 /*   this(regras.size());
+	    this.regras = regras;
+	    this.pesosRegrasAuto = pesosRegras;
+	    this.ficheiroSpam = ficheiroSpam;
+	    this.ficheiroHam = ficheiroHam;*/
+<span class="nc" id="L31">	  }</span>
+
+<span class="nc" id="L33">	  public AntiSpamFilterProblem(Integer numberOfVariables) {</span>
+	    /*setNumberOfVariables(numberOfVariables);
+	    setNumberOfObjectives(2);
+	    setName(&quot;AntiSpamFilterProblem&quot;);
+
+	    List&lt;Double&gt; lowerLimit = new ArrayList&lt;&gt;(getNumberOfVariables()) ;
+	    List&lt;Double&gt; upperLimit = new ArrayList&lt;&gt;(getNumberOfVariables()) ;
+
+	    for (int i = 0; i &lt; getNumberOfVariables(); i++) {
+	      lowerLimit.add(-5.0);
+	      upperLimit.add(5.0);
+	    }
+
+	    setLowerLimit(lowerLimit);
+	    setUpperLimit(upperLimit);*/
+<span class="nc" id="L48">	  }</span>
+	  	  
+	  public void evaluate(DoubleSolution solution) {
+		
+<span class="nc" id="L52">		  ObservableList&lt;String&gt; regraSpamAuto = FXCollections.observableArrayList();</span>
+<span class="nc" id="L53">		  ObservableList&lt;String&gt; regrasHamAuto = FXCollections.observableArrayList();   </span>
+<span class="nc" id="L54">		  double[] fx = new double[getNumberOfObjectives()];</span>
+<span class="nc" id="L55">		    double[] x = new double[getNumberOfVariables()];</span>
+		  
+<span class="nc bnc" id="L57" title="All 2 branches missed.">		    for (int i = 0; i &lt; solution.getNumberOfVariables(); i++) {</span>
+<span class="nc" id="L58">			     x[i] = solution.getVariableValue(i) ;</span>
+			    }
+<span class="nc" id="L60">		  DadosDao dadosAutoSpam = new DadosDao();</span>
+<span class="nc" id="L61">		  dadosAutoSpam.lerFicheiro(ficheiroSpam, regraSpamAuto, pesosRegrasAuto, TipoFicheiro.Spam);</span>
+<span class="nc" id="L62">		  AntiSpamMethods.calcularFpEFn(this.regras, regraSpamAuto, null, TipoFicheiro.Spam, fx, x);</span>
+		  
+<span class="nc" id="L64">		  DadosDao dadosAutoHam = new DadosDao();</span>
+<span class="nc" id="L65">		  dadosAutoHam.lerFicheiro(ficheiroHam, regrasHamAuto, pesosRegrasAuto, TipoFicheiro.Ham);</span>
+<span class="nc" id="L66">		  AntiSpamMethods.calcularFpEFn(this.regras, regrasHamAuto, null, TipoFicheiro.Ham, fx, x);</span>
+<span class="nc" id="L67">		  solution.setObjective(0, fx[0]);</span>
+<span class="nc" id="L68">		  solution.setObjective(1, fx[1]);</span>
+<span class="nc" id="L69">	  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>ES1-2017 (21/12/2017 11:29:45)</div></body></html>
