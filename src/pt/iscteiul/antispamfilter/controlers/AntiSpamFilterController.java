@@ -90,7 +90,7 @@ public class AntiSpamFilterController {
 	 * Utiliza checkBoxs para selecionar o tipo de ficheiro que se pretende
 	 * carregar e se estiver selecionado carrega o caminho até ao ficheiro e
 	 * desseleciona a checkBox {@code if (rulesCB.isSelected()) {
-	 * rulesTF.setText(path); rulesCB.setSelected(false); savesCB} }
+	 * rulesTF.setText(path); rulesCB.setSelected(false); savesCB.set} }
 	 */
 	@FXML
 	public void browse() {
