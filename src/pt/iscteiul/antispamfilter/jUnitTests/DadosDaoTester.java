@@ -1,65 +1,67 @@
 package pt.iscteiul.antispamfilter.jUnitTests;
 
-
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import pt.iscteiul.antispamfilter.models.AntiSpamMethods;
+
 import pt.iscteiul.antispamfilter.models.TipoFicheiro;
 import pt.iscteiul.antispamfilter.models.dao.DadosDao;
 
-class DadosDaoTester {
+public class DadosDaoTester {
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 	}
+
+	/**
+	 * Este metodo permite testar o metodo lerFicheiro da classe DadosDao do
+	 * package pt.isteciul.antispamfilter.models.dao
+	 * <p>
+	 * Criamos duas observableList para armazenar as regras,seus pesos e as
+	 * regras carregados a partir da leitura do ficheiro rulesTest.cf na
+	 * directoria jUnitTests.
+	 * 
+	 * Por ultimo, chamamos o metodo passando lhe os valores.
+	 */
 
 	@Test
-	void testLerFicheiro() {
+	public void testLerFicheiro() {
 
 		ObservableList<String> regras = FXCollections.observableArrayList();
 		ObservableList<Double> pesosRegras = FXCollections.observableArrayList();
-		ObservableList<String> regraSpamEHam = FXCollections.observableArrayList();
 
 		DadosDao d = new DadosDao();
 		d.lerFicheiro("jUnitTests/rulesTest.cf", regras, pesosRegras, TipoFicheiro.Rules);
 
-		DadosDao dS = new DadosDao();
-		dS.lerFicheiro("jUnitTests/spamTest.log", regraSpamEHam, pesosRegras, TipoFicheiro.Spam);
-		AntiSpamMethods.calcularFpEFn(regras, regraSpamEHam, pesosRegras, TipoFicheiro.Spam, null, null);
-
-		ObservableList<String> regras1 = FXCollections.observableArrayList();
-		ObservableList<Double> pesosRegras1 = FXCollections.observableArrayList();
-		ObservableList<String> regraSpamEHam1 = FXCollections.observableArrayList();
-
-		DadosDao d1 = new DadosDao();
-		d1.lerFicheiro("jUnitTests/rulesTest.cf", regras1, pesosRegras1, TipoFicheiro.Rules);
-
-		DadosDao dS1 = new DadosDao();
-		dS1.lerFicheiro("jUnitTests/hamTest.log", regraSpamEHam1, pesosRegras, TipoFicheiro.Ham);
-		AntiSpamMethods.calcularFpEFn(regras1, regraSpamEHam1, pesosRegras1, TipoFicheiro.Ham, null, null);
 	}
 
+	/**
+	 * Este metodo permite testar o metodo escreverFicheiro da classe DadosDao
+	 * do package pt.isteciul.antispamfilter.models.dao.
+	 * <p>
+	 * Passando lhe um ficheiro para escrita e uma string que contem uma frase
+	 * para escrever dentro deste
+	 *
+	 */
 	@Test
-	void testEscreverFicheiro() {
+	public void testEscreverFicheiro() {
 		DadosDao d = new DadosDao();
 
 		String nomeFicheiro = "jUnitTests/writeTest.cf";
@@ -67,7 +69,6 @@ class DadosDaoTester {
 		String text = "Ola Mundo!";
 
 		d.escreverFicheiro(nomeFicheiro, text);
-
 	}
 
 }

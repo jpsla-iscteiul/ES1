@@ -12,13 +12,15 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import pt.iscteiul.antispamfilter.models.AntiSpamMethods;
 import pt.iscteiul.antispamfilter.models.TipoFicheiro;
-import pt.iscteiul.antispamfilter.models.dao.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
+
+import pt.iscteiul.antispamfilter.models.dao.DadosDao;
 
 /**
  * Classe controladora da GUI Main View (Interface gráfica)
@@ -32,10 +34,11 @@ import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
  * falsos negativos de ambas configurações
  * <li>
  * 
- * @author João Lola 83169 Délcio Pedro 81611
+ * @author João Lola 83169 Délcio Pedro 81611 Ansumane Mane 79170
  * 
  * 
  */
+
 public class AntiSpamFilterController {
 
 	@FXML
@@ -75,9 +78,16 @@ public class AntiSpamFilterController {
 
 	@FXML
 	void initialize() {
-
 	}
 
+	/**
+	 * Permite procurar por ficheiros na directoria
+	 * <p>
+	 * Utiliza checkBoxs para selecionar o tipo de ficheiro que se pretende
+	 * carregar e se estiver selecionado carrega o caminho até ao ficheiro e
+	 * desseleciona a checkBox {@code if (rulesCB.isSelected()) {
+	 * rulesTF.setText(path); rulesCB.setSelected(false); } }
+	 */
 	@FXML
 	public void browse() {
 
@@ -105,6 +115,16 @@ public class AntiSpamFilterController {
 		}
 	}
 
+	/**
+	 * Carrega os dados dos ficheiros para as duas ListView de regras e para a
+	 * ListView de pesos de configuração manual
+	 * <p>
+	 * Verifica se o ficheiro contém os pesos das regras, caso não contém
+	 * adiciona pesos aleatórios {@code if (pesosRegras.isEmpty()) {
+	 * AntiSpamMethods.gerarPesos(regras, pesosRegras);
+	 * weightsLV.setItems(pesosRegras); } }
+	 */
+
 	public void loadFiles() {
 
 		DadosDao dadosRules = new DadosDao();
@@ -121,6 +141,15 @@ public class AntiSpamFilterController {
 
 	}
 
+	/**
+	 * Permite alterar os pesos da ListView de pesos de configuração manual
+	 * <p>
+	 * Verifica se o valor que se pretende adicionar a textField para alterar na
+	 * ListView está entre -6 e 6 exclusivos {@code if (peso > -6 && peso < 6) {
+	 * pesosRegras.set(position, peso); weightsLV.setItems(pesosRegras); } }
+	 * <p>
+	 * Caso não esteja lança um alerta do tipo erro
+	 */
 	public void editWeights() {
 
 		double peso = Double.parseDouble(weightsTF.getText());
@@ -134,6 +163,17 @@ public class AntiSpamFilterController {
 			alert.showAndWait();
 		}
 	}
+
+	/**
+	 * Avalia se a configuração manual existente é adequada calculando o número
+	 * de falsos positivos (spam) e falsos negativos (ham)
+	 * <p>
+	 * Por fim adiciona os falsos positivos e negativos calculados as Labels
+	 * {@code
+	 * fpLBL.setText(String.valueOf(AntiSpamMethods.falsoPositivo));
+	 * fnLBL.setText(String.valueOf(AntiSpamMethods.falsoNegativo));
+	 *}
+	 */
 
 	public void filterEvaluation() {
 
@@ -150,9 +190,24 @@ public class AntiSpamFilterController {
 		fnLBL.setText(String.valueOf(AntiSpamMethods.falsoNegativo));
 	}
 
+	/**
+	 * Gera configuração optimizada, calculando os falsos positivos e negativos
+	 * automaticamente através do algoritmo dado NSGAII {@code
+	 * AntiSpamFilterAutomaticConfiguration.automaticConfiguration(args, regras, pesosRegras, spamTF.getText(),
+		hamTF.getText());	
+	 *}
+	 * <p>
+	 * Carrega os pesos das regras gerado pelo algoritmo para a ListView de
+	 * pesos
+	 * <p>
+	 * E adiciona as labels o número de falsos positivos e negativos optimazados
+	 * gerados pelo algoritmo
+	 */
+
 	public void generateOptimizedConfiguration() throws IOException {
 
 		String[] args = null;
+
 		AntiSpamFilterAutomaticConfiguration.automaticConfiguration(args, regras, pesosRegras, spamTF.getText(),
 				hamTF.getText());
 
@@ -162,6 +217,11 @@ public class AntiSpamFilterController {
 		optFpLBL.setText(String.valueOf(AntiSpamMethods.falsoPositivoAuto));
 	}
 
+	/**
+	 * Método para guardar no ficheiro a configuração manual gerada pelo calculo
+	 * dos falsos positivos e negativos
+	 */
+
 	public void saveConfiguration() throws FileNotFoundException {
 
 		PrintWriter fileWriterrulesTF = new PrintWriter(new File(rulesTF.getText()));
@@ -170,11 +230,15 @@ public class AntiSpamFilterController {
 		}
 		fileWriterrulesTF.close();
 
-		Alert alert = new Alert(AlertType.CONFIRMATION);
+		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setHeaderText("A configuração foi salva com sucesso no ficheiro.");
 		alert.showAndWait();
-
 	}
+
+	/**
+	 * Método para guardar ou sobrepôr no ficheiro a configuração automática
+	 * gerada pelo calculo dos falsos positivos e negativos
+	 */
 
 	public void overwriteSavedConfiguration() throws FileNotFoundException {
 
@@ -184,7 +248,7 @@ public class AntiSpamFilterController {
 		}
 		fileWriterrules.close();
 
-		Alert alert = new Alert(AlertType.CONFIRMATION);
+		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setHeaderText("A configuração foi salva com sucesso no ficheiro.");
 		alert.showAndWait();
 	}

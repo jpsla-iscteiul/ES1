@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AntiSpamMethods.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ES1-2017 (Dec 22, 2017 2:15:25 PM)</a> &gt; <a href="../../index.html" class="el_group">ES1-2017</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">pt.iscteiul.antispamfilter.models</a> &gt; <span class="el_source">AntiSpamMethods.java</span></div><h1>AntiSpamMethods.java</h1><pre class="source lang-java linenums">package pt.iscteiul.antispamfilter.models;
+
+import java.util.Random;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import pt.iscteiul.antispamfilter.models.dao.DadosDao;
+
+/**
+ * Classe para gerar os pesos aleatórios, os pesos optimizados e calcular os
+ * falsos positivos e negativos. Serve de auxilio a classe
+ * AntiSpamFilterController
+ * &lt;li&gt;
+ * 
+ * @author João Lola 83169, Délcio Pedro 81611
+ */
+
+<span class="nc" id="L17">public abstract class AntiSpamMethods {</span>
+
+<span class="fc" id="L19">	public static int falsoPositivo = 0;</span>
+<span class="fc" id="L20">	public static int falsoNegativo = 0;</span>
+<span class="fc" id="L21">	public static int falsoPositivoAuto = 0;</span>
+<span class="fc" id="L22">	public static int falsoNegativoAuto = 0;</span>
+<span class="fc" id="L23">	public static ObservableList&lt;String&gt; pesosListView = FXCollections.observableArrayList();</span>
+
+	/**
+	 * Método que gera pesos aleatórios a serem utilizados na ListView de pesos
+	 * caso as regras não tenham pesos associados
+	 * &lt;li&gt;Este método tem como parametros: &lt;br&gt;
+	 * uma lista de regras, que será utilizado o seu tamanho para a lista de
+	 * pesos
+	 * 
+	 * @link regras &lt;br&gt;
+	 *       e uma lista de pesos onde serão adicionaos os pesos correspondentes
+	 *       as regras
+	 * @link pesos
+	 * 
+	 *
+	 * @param regras
+	 * @param pesos
+	 */
+	public static void gerarPesos(ObservableList&lt;String&gt; regras, ObservableList&lt;Double&gt; pesos) {
+
+<span class="fc" id="L43">		double pesoMin = -5.1;</span>
+<span class="fc" id="L44">		double pesoMax = 5.1;</span>
+<span class="fc" id="L45">		Random random = new Random();</span>
+
+<span class="fc bfc" id="L47" title="All 2 branches covered.">		for (int i = 0; i &lt; regras.size(); i++) {</span>
+<span class="fc" id="L48">			pesos.addAll(random.nextDouble() * (pesoMax - pesoMin) + pesoMin);</span>
+		}
+<span class="fc" id="L50">	}</span>
+
+	/**
+	 * Método para calcular os falsos positivos e negativos para ambos os tipos
+	 * de ficheiros e configuração (automática ou manual)
+	 * &lt;p&gt;
+	 * Recebe como parametros: &lt;br&gt;
+	 * A lista com regras
+	 * 
+	 * @param regras
+	 *            &lt;p&gt;
+	 *            Uma lista de regras que pode ser do ficheiro spam ou do ham
+	 * @param regraSpamEHam
+	 *            &lt;br&gt;
+	 *            Uma lista com os pesos das regras
+	 * @param pesosRegras
+	 *            &lt;p&gt;
+	 *            O tipo de ficheiro, se spam calcula falsos positivos e se ham
+	 *            calcula falsos negativos
+	 * @param tipo
+	 *            &lt;p&gt;
+	 *            E os arrays ou listas pertencentes ao código da classe
+	 * @link AntiSpamFilterProblem
+	 * @param fx
+	 * @param x
+	 */
+	public static void calcularFpEFn(ObservableList&lt;String&gt; regras, ObservableList&lt;String&gt; regraSpamEHam,
+			ObservableList&lt;Double&gt; pesosRegras, TipoFicheiro tipo, double[] fx, double[] x) {
+
+<span class="fc" id="L79">		double somaPesos = 0;</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">		for (int i = 0; i &lt; regraSpamEHam.size(); i++) {</span>
+<span class="fc" id="L81">			if (Character.isDigit(regraSpamEHam.get(i).charAt(0))) {</span>
+			}
+<span class="fc bfc" id="L83" title="All 2 branches covered.">			if (!Character.isDigit(regraSpamEHam.get(i).charAt(0))) {</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">				for (int j = 0; j &lt; regras.size(); j++) {</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">					if (regras.get(j).equals(regraSpamEHam.get(i))) {</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">						if (pesosRegras != null) {</span>
+<span class="fc" id="L87">							somaPesos += pesosRegras.get(j);</span>
+						}
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">						if (x != null) {</span>
+<span class="nc" id="L90">							somaPesos += x[j];</span>
+						}
+<span class="fc" id="L92">						j = 0;</span>
+<span class="fc" id="L93">						break;</span>
+					}
+				}
+<span class="fc" id="L96">			} else {</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">				if (i &gt; 0) {</span>
+
+<span class="fc bfc" id="L99" title="All 2 branches covered.">					if (tipo.equals(TipoFicheiro.Spam)) {</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">						if (somaPesos &gt;= 5) {</span>
+<span class="fc" id="L101">							falsoPositivo++;</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">							if (fx != null) {</span>
+<span class="nc" id="L103">								fx[0]++;</span>
+							}
+<span class="fc" id="L105">							somaPesos = 0;</span>
+<span class="fc" id="L106">						} else {</span>
+<span class="fc" id="L107">							somaPesos = 0;</span>
+						}
+					}
+<span class="fc bfc" id="L110" title="All 2 branches covered.">					if (tipo.equals(TipoFicheiro.Ham)) {</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">						if (somaPesos &lt;= 5) {</span>
+<span class="fc" id="L112">							falsoNegativo++;</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">							if (fx != null) {</span>
+<span class="nc" id="L114">								fx[1]++;</span>
+							}
+<span class="fc" id="L116">							somaPesos = 0;</span>
+<span class="fc" id="L117">						} else {</span>
+<span class="fc" id="L118">							somaPesos = 0;</span>
+
+						}
+					}
+				}
+			}
+		}
+<span class="fc" id="L125">	}</span>
+
+	/**
+	 * Método que calcula o menor valor de uma lista de valores e converte o
+	 * resultado em inteiro. Este é utilizado para auxiliar o método pesos
+	 * optimizados. &lt;br&gt;
+	 * Tem como parametro uma lista de valores do tipo String
+	 * 
+	 * @param valores
+	 */
+	private static int menorValor(ObservableList&lt;String&gt; valores) {
+<span class="fc" id="L136">		int fnMenor = 0;</span>
+<span class="fc" id="L137">		ObservableList&lt;Integer&gt; fNs = FXCollections.observableArrayList();</span>
+
+<span class="fc bfc" id="L139" title="All 2 branches covered.">		for (int i = 0; i &lt; valores.size(); i++) {</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">			if (i % 2 != 0) {</span>
+<span class="fc" id="L141">				double valor = Double.parseDouble(valores.get(i));</span>
+<span class="fc" id="L142">				fNs.add((int) valor);</span>
+			}
+		}
+<span class="fc" id="L145">		int comparador = fNs.get(0);</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">		for (int i = 1; i &lt; fNs.size(); i++) {</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">			if (fNs.get(i) &lt; comparador) {</span>
+<span class="fc" id="L148">				comparador = fNs.get(i);</span>
+<span class="fc" id="L149">				fnMenor = comparador;</span>
+			}
+		}
+
+<span class="fc" id="L153">		return fnMenor;</span>
+	}
+
+	/**
+	 * Método para obter a lista de pesos optimizados pelo algoritmo NSGAII.
+	 * Este, utiliza o método menorValor para encontrar o menor valor falso
+	 * negativo gerado pelo algoritmo.
+	 * 
+	 * &lt;br&gt;
+	 * Tem como parametro a lista de regras que será utilizado o seu comprimento
+	 * para localizar as posições de inicio e fim da lista de pesos a ela
+	 * atribuida pelo algoritmo ou configuração automatizada {@code
+	 * int fim = regras.size() * linha;
+		int inicio = fim - regras.size()}
+	 * 
+	 * @param regras
+	 *            Por fim adiciona os pesos obtidos a lista de pesos a ser
+	 *            utilizada na ListView
+	 */
+
+	public static void pesosOptimizados(ObservableList&lt;String&gt; regras) {
+
+<span class="fc" id="L175">		DadosDao rf = new DadosDao();</span>
+<span class="fc" id="L176">		ObservableList&lt;String&gt; listaFpEFN = FXCollections.observableArrayList();</span>
+<span class="fc" id="L177">		int linha = 0;</span>
+<span class="fc" id="L178">		rf.lerFicheiro(&quot;experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rf&quot;, listaFpEFN, null,</span>
+<span class="fc" id="L179">				null);</span>
+
+<span class="fc" id="L181">		falsoNegativoAuto = menorValor(listaFpEFN);</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">		for (int i = 0; i &lt; listaFpEFN.size(); i++) {</span>
+<span class="fc bfc" id="L183" title="All 2 branches covered.">			if (listaFpEFN.get(i).contains(String.valueOf(falsoNegativoAuto))) {</span>
+<span class="fc" id="L184">				falsoPositivoAuto = (int) Double.parseDouble(listaFpEFN.get(i - 1));</span>
+<span class="fc" id="L185">				linha = (i + 1) / 2;</span>
+			}
+		}
+
+<span class="fc" id="L189">		DadosDao rs = new DadosDao();</span>
+<span class="fc" id="L190">		ObservableList&lt;String&gt; pesosAlgoritmo = FXCollections.observableArrayList();</span>
+<span class="fc" id="L191">		rs.lerFicheiro(&quot;experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rs&quot;, pesosAlgoritmo, null,</span>
+<span class="fc" id="L192">				null);</span>
+<span class="fc" id="L193">		int fim = regras.size() * linha;</span>
+<span class="fc" id="L194">		int inicio = fim - regras.size();</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">		for (int i = inicio; i &lt; fim; i++) {</span>
+<span class="fc" id="L196">			pesosListView.add(pesosAlgoritmo.get(i));</span>
+		}
+<span class="fc" id="L198">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>ES1-2017 (Dec 22, 2017 2:15:25 PM)</div></body></html>

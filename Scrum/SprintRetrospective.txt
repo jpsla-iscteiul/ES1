@@ -1,0 +1,175 @@
+Dia 7 de Novembro de 2017 16H45-17h15
+
+Estiveram presentes os seguintes elementos:
+
+João Lola - Scrum Master
+Délcio Pedro - Developer
+Ansumane Mané - Developer
+Cedrick Beta - Quality Manager
+
+Start Doing:
+João Lola
+Implementação visual da GUI:
+1. Introduzir três textfields para carregar os ficheiros;
+2. Introduzir três botões para permitir fazer o browsing;
+3. Introduzir um botão para carregar os ficheiros;
+4. Quatro listViews para visualizar as regras do  ficheiro rules.cf e pesos gerados aletorios e gerados pelo NSGA-II;
+5. Uma textfield para mudar um valor de peso na listview;
+6. Um botão para avaliar os fp's e fn'seguintes;
+7. Dois botão para salvar a configuração no ficheiro;
+8. Um botão para gerar a configuração otimizada;
+9. Quatro label's para mostrar o nº de fp's e fn's de ambas as configurações;
+
+Délcio Pedro e João Lola
+Implementação do metodo para:
+1. Leitura do Ficheiro;
+2. Browsing do Ficheiro;
+3. Alterar o peso;
+4. Carregar os ficheiros;
+
+
+Dia 17 de Novembro de 2017 16H45-17h15
+
+Estiveram presentes os seguintes elementos:
+
+João Lola - Scrum Master
+Délcio Pedro - Developer
+Ansumane Mané - Developer
+
+
+Start Doing:
+
+Délcio Pedro e João Lola
+Implementação do metodo para:
+1. Escrever Ficheiro;
+	Verificar se o ficheiro rules.cf contem pesos ou não.
+2. Salvar a configuração do utilizador;
+
+
+
+
+Dia 24 de Novembro de 2017 19h40-20h00
+
+Estiveram presentes os seguintes elementos:
+
+João Lola - Scrum Master
+Délcio Pedro - Developer
+Ansumane Mané - Developer
+
+Ansumane Mané
+Start Doing:
+
+Implmentar a fucnionalidade para abrir os ficheiros ham.log e spam.log e percorrer as linhas dos ficheiros
+para substituir as regras pelos seus respectivos pesos. Fazer a respectiva soma 
+linha-a-linha e no final verificar se a soma de todas regras dessa linha é um 
+fn ou um fp e incrementar um contador.
+
+
+
+
+
+Dia 30 de Novembro de 2017 19h30-19h50
+
+Ansumane Mané e Delcio Pedro
+Continue Doing:
+Implmentar a fucnionalidade para abrir os ficheiros ham.log e spam.log e percorrer as linhas dos ficheiros
+para substituir as regras pelos seus respectivos pesos. Fazer a respectiva soma 
+linha-a-linha e no final verificar se a soma de todas regras dessa linha é um 
+fn ou um fp e incrementar um contador.
+
+
+
+
+Dia 8 de Dezembro de 2017 19h30-19h50
+
+Estiveram presentes os seguintes elementos:
+
+João Lola - Scrum Master
+Délcio Pedro - Developer
+Ansumane Mané - Developer
+Cedrick Beta - Quality Manager
+
+Start Doing:
+
+Ansumane Mane e Delcio Pedro:
+Começar a implementar a parte de gerar pesos otimizados com recurso ao algortimo NSGA-II.
+
+
+
+
+Dia 12 de Dezembro de 2017 16h00-16h30
+
+Estiveram presentes os seguintes elementos:
+
+João Lola - Scrum Master
+Délcio Pedro - Developer
+Ansumane Mané - Developer
+Cedrick Beta - Quality Manager
+
+Start Doing:
+Delcio Pedro:
+Correção e organização do codigo de fp's e fn's manuais.
+
+Continue Doing:
+Ansumane Mane:
+a implementar a parte de gerar pesos otimizados com recurso ao algortimo NSGA-II.
+
+
+
+
+
+Dia 15 de Dezembro de 2017 19h30 - 19h45
+
+João Lola - Scrum Master
+Délcio Pedro - Developer
+Ansumane Mané - Developer
+
+Start Doing:
+Delcio Pedro:
+Correção e organização do codigo de fp's e fn's manuais.
+
+Continue Doing:
+Ansumane Mane:
+a implementar a parte de gerar pesos otimizados com recurso ao algortimo NSGA-II.
+
+
+
+
+
+Dia 17 de Dezembro de 2017 16h00 - 16h20
+
+João Lola - Scrum Master
+Délcio Pedro - Developer
+Ansumane Mané - Developer
+Cedrick Beta - Quality Manager
+
+Start Doing:
+Delcio Pedro:
+Correção e organização do codigo de fp's e fn's manuais.
+
+Continue Doing:
+Ansumane Mane:
+Finalizinação da implemenção da geraração pesos otimizados com recurso ao algortimo NSGA-II.
+
+
+
+
+
+Dia 19 de Dezembro de 2017 16h00 - 16h20
+
+João Lola - Scrum Master
+Délcio Pedro - Developer
+Ansumane Mané - Developer
+Cedrick Beta - Quality Manager
+
+Start Doing:
+João Lola, Cedrick Beta e Delcio Pedro:
+
+Testes Unitarios;
+Gerar Coverage;
+Diagrama de Classes;
+Ficheiro Hvboxplot;
+Ficheiro latex;
+Diagrama de Classes;
+Java Doc;
+

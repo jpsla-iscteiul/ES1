@@ -1,6 +1,7 @@
 package pt.iscteiul.antispamfilter.models.dao;
 
 import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,12 +11,33 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import pt.iscteiul.antispamfilter.models.TipoFicheiro;
 
+/**
+ * Classe responsável por ler e escrever em ficheiros
+ * <p>
+ * Esta classe é utilizada pelas classes
+ * 
+ * @link AntiSpamFilterController
+ * @link AntiSpamMethods
+ *       <li>
+ * @author João Lola 83169
+ * @author Délcio Pedro 81611
+ */
+
 public class DadosDao {
+
+	TipoFicheiro itsTipoFicheiro;
+
 	/**
+	 * Método para ler ficheiros e adicionar as regras e os pesos, caso haja
+	 * pesos no ficheiro
+	 * <p>
+	 * Recebe como parametro o nome do ficheiro, um vector ou array para as
+	 * regras, outro vector para os pesos e o tipo de ficheiro
 	 * 
 	 * @param nomeFicheiro
 	 * @param regras
 	 * @param pesos
+	 * @param tipo
 	 */
 	public void lerFicheiro(String nomeFicheiro, ObservableList<String> regras, ObservableList<Double> pesos,
 			TipoFicheiro tipo) {
@@ -43,9 +65,15 @@ public class DadosDao {
 	}
 
 	/**
+	 * Método para escrever no ficheiro ou guardar alterações
+	 * <p>
+	 * Recebe como parametro o nome do ficheiro e o texto que se pretende
+	 * escrever no ficheiro
 	 * 
 	 * @param nomeFicheiro
 	 * @param text
+	 * @param pesos
+	 * @param tipo
 	 */
 	public void escreverFicheiro(String nomeFicheiro, String text) {
 

@@ -1,0 +1,6 @@
+antiSpamFilter
+pt.iscteiul.antispamfilter.application
+pt.iscteiul.antispamfilter.controlers
+pt.iscteiul.antispamfilter.jUnitTests
+pt.iscteiul.antispamfilter.models
+pt.iscteiul.antispamfilter.models.dao

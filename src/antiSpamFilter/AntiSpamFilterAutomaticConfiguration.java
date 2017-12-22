@@ -14,7 +14,7 @@ import org.uma.jmetal.util.experiment.util.ExperimentProblem;
 
 import javafx.collections.ObservableList;
 
-
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +49,9 @@ public class AntiSpamFilterAutomaticConfiguration {
 		new GenerateLatexTablesWithStatistics(experiment).run();
 		new GenerateBoxplotsWithR<>(experiment).setRows(1).setColumns(1).run();
 
+		// pdfLatexGenerator();
+		// graphGenerator();
+
 	}
 
 	static List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> configureAlgorithmList(
@@ -65,5 +68,42 @@ public class AntiSpamFilterAutomaticConfiguration {
 
 		return algorithms;
 	}
+	
+	public static void graphGenerator() throws IOException {
+
+		String[] paramsLatex = new String[2];
+
+		paramsLatex[0] = "C:\\Program Files\\MiKTeX 2.9\\miktex\\bin\\x64\\miktex-pdflatex.exe";
+
+		paramsLatex[1] = "experimentBaseDirectory/AntiSpamStudy/latex/AntiSpamStudy.tex";
+
+		String[] envpLatex = new String[1];
+
+		envpLatex[0] = "Path=C:\\Program Files\\MiKTeX 2.9\\miktex\\bin\\x64";
+
+		Process p = Runtime.getRuntime().exec(paramsLatex, envpLatex,
+				new File("experimentBaseDirectory/AntiSpamStudy/latex"));
+
+		p.exitValue();
+	}
+
+	public static void pdfLatexGenerator() throws IOException {
+
+		String[] paramsR = new String[2];
+
+		paramsR[0] = "C:\\Program Files\\R\\R-3.4.3\\bin\\x64\\Rscript.exe";
+
+		paramsR[1] = "experimentBaseDirectory/AntiSpamStudy/R/HV.Boxplot.R";
+
+		String[] envpR = new String[1];
+
+		envpR[0] = "Path=C:\\Program Files\\R\\R-3.4.3\\bin\\x64";
+
+		Process pR = Runtime.getRuntime().exec(paramsR, envpR, new File("experimentBaseDirectory/AntiSpamStudy/R"));
+
+		pR.exitValue();
+
+	}
+
 
 }

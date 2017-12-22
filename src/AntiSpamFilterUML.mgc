@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="pt.iscteiul.antispamfilter.models.AntiSpamMethods"
+        x="730" y="568">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="false"
+            default-accepted="false" static-accepted="true"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="pt.iscteiul.antispamfilter.models.dao.DadosDao"
+            endpointName="itsDadosDao" kind="Simple"/>
+        <Association
+            destinationClassName="pt.iscteiul.antispamfilter.models.TipoFicheiro"
+            endpointName="itsTipoFicheiro" kind="Simple"/>
+        <Communication destinationClassName="pt.iscteiul.antispamfilter.models.dao.DadosDao"/>
+    </Class>
+    <Class name="pt.iscteiul.antispamfilter.models.TipoFicheiro" x="382" y="1204">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="antiSpamFilter.AntiSpamFilterAutomaticConfiguration"
+        x="848" y="232">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="false"
+            default-accepted="false" static-accepted="true"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="antiSpamFilter.AntiSpamFilterProblem"
+            endpointName="itsAntiSpamFilterProblem" kind="Simple"/>
+    </Class>
+    <Class name="antiSpamFilter.AntiSpamFilterProblem" x="1830" y="548">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="false"
+            default-accepted="false" static-accepted="true"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="pt.iscteiul.antispamfilter.models.AntiSpamMethods"
+            endpointName="itsAntiSpamMethods" kind="Simple"/>
+        <Association
+            destinationClassName="pt.iscteiul.antispamfilter.models.dao.DadosDao"
+            endpointName="itsDadosDao" kind="Simple"/>
+        <Association
+            destinationClassName="pt.iscteiul.antispamfilter.models.TipoFicheiro"
+            endpointName="itsTipoFicheiro" kind="Simple"/>
+        <Communication destinationClassName="pt.iscteiul.antispamfilter.models.AntiSpamMethods"/>
+        <Communication destinationClassName="pt.iscteiul.antispamfilter.models.dao.DadosDao"/>
+    </Class>
+    <Class name="pt.iscteiul.antispamfilter.models.dao.DadosDao"
+        x="1486" y="1216">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="pt.iscteiul.antispamfilter.models.TipoFicheiro"
+            endpointName="itsTipoFicheiro" kind="Simple"/>
+    </Class>
+    <Class
+        name="pt.iscteiul.antispamfilter.controlers.AntiSpamFilterController"
+        x="114" y="347">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="false"
+            default-accepted="false" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="antiSpamFilter.AntiSpamFilterAutomaticConfiguration"
+            endpointName="itsAntiSpamFilterAutomaticConfiguration" kind="Simple"/>
+        <Association
+            destinationClassName="pt.iscteiul.antispamfilter.models.AntiSpamMethods"
+            endpointName="itsAntiSpamMethods" kind="Simple"/>
+        <Association
+            destinationClassName="pt.iscteiul.antispamfilter.models.dao.DadosDao"
+            endpointName="itsDadosDao" kind="Simple"/>
+        <Association
+            destinationClassName="pt.iscteiul.antispamfilter.models.TipoFicheiro"
+            endpointName="itsTipoFicheiro" kind="Simple"/>
+        <Communication destinationClassName="pt.iscteiul.antispamfilter.models.AntiSpamMethods"/>
+        <Communication destinationClassName="antiSpamFilter.AntiSpamFilterAutomaticConfiguration"/>
+        <Communication destinationClassName="pt.iscteiul.antispamfilter.models.dao.DadosDao"/>
+    </Class>
+</ClassDiagram>
