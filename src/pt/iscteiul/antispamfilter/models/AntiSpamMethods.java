@@ -5,6 +5,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import pt.iscteiul.antispamfilter.models.dao.DadosDao;
 
+/**
+ * Classe para gerar os pesos aleatórios, os pesos optimizados  
+ * e calcular os falsos positivos e negativos. 
+ * Serve de auxilio a classe AntiSpamFilterController 
+ *<li>
+ * @author João Lola 83169, Délcio Pedro 81611
+ */
+
 public abstract class AntiSpamMethods {
 
 	public static int falsoPositivo = 0;
@@ -14,9 +22,19 @@ public abstract class AntiSpamMethods {
 	public static ObservableList<String> pesosListView = FXCollections.observableArrayList();
 
 	/**
+	 *Método que gera pesos aleatórios a serem utilizados na ListView de pesos 
+	 *caso as regras não tenham pesos associados 
+	 *<li>
+	 *Este método tem como parametros:
+	 * <br>
+	 * uma lista de regras, que será utilizado o seu tamanho 
+	 * para a lista de pesos 
+	 * @link regras
+	 * <br>
+	 * e uma lista de pesos onde serão adicionaos os pesos
+	 * correspondentes as regras 
+	 *@link pesos   
 	 * 
-	 * @param regras
-	 * @param pesos
 	 */
 	public static void gerarPesos(ObservableList<String> regras, ObservableList<Double> pesos) {
 
@@ -30,11 +48,28 @@ public abstract class AntiSpamMethods {
 	}
 
 	/**
-	 * 
+	 * Método para calcular os falsos positivos e negativos para ambos 
+	 * os tipos de ficheiros e configuração (automática ou manual)
+	 * <p>  
+	 * Recebe como parametros:
+	 * <br>
+	 * A lista com regras
 	 * @param regras
+	 * <p>
+	 * Uma lista  de regras que pode ser do ficheiro spam ou do ham
 	 * @param regraSpamEHam
+	 * <br>
+	 * Uma lista com os pesos das regras 
 	 * @param pesosRegras
+	 * <p>
+	 * O tipo de ficheiro, se spam calcula falsos positivos e se ham 
+	 * calcula falsos negativos
 	 * @param tipo
+	 * <p>
+	 * E os arrays ou listas pertencentes ao código da classe
+	 * @link AntiSpamFilterProblem 
+	 * @param fx 
+	 * @param x 
 	 */
 	public static void calcularFpEFn(ObservableList<String> regras, ObservableList<String> regraSpamEHam,
 			ObservableList<Double> pesosRegras, TipoFicheiro tipo, double[] fx, double[] x) {
@@ -61,9 +96,12 @@ public abstract class AntiSpamMethods {
 
 					if (tipo.equals(TipoFicheiro.Spam)) {
 						if (somaPesos >= 5) {
+							System.out.println("somaPesos maior "+ somaPesos);
 							falsoPositivo++;
+							System.out.println("falsos positivos "+ falsoPositivo);
 							if (fx != null) {
 								fx[0]++;
+								System.out.println("FX [0] " + fx[0]);
 							}
 							somaPesos = 0;
 						} else {
@@ -73,8 +111,10 @@ public abstract class AntiSpamMethods {
 					if (tipo.equals(TipoFicheiro.Ham)) {
 						if (somaPesos <= 5) {
 							falsoNegativo++;
+							System.out.println("falsos negativos "+ falsoNegativo);
 							if (fx != null) {
 								fx[1]++;
+								System.out.println("FX[1]" + fx[1]);
 							}
 							somaPesos = 0;
 						} else {
@@ -88,12 +128,12 @@ public abstract class AntiSpamMethods {
 	}
 
 	/**
-	 * 
-	 * @param regras
-	 * @param regraSpamEHam
-	 * @param x
-	 * @param tipo
-	 * @param fx
+	 * Método que calcula o menor valor de uma lista de valores 
+	 * e converte o resultado em inteiro. Este é utilizado  
+	 * para auxiliar o método pesos optimizados. 
+	 * <br>
+	 * Tem como parametro uma lista de valores do tipo String
+	 * @param valores
 	 */
 	private static int menorValor(ObservableList<String> valores) {
 		int fnMenor = 0;
@@ -116,6 +156,22 @@ public abstract class AntiSpamMethods {
 		return fnMenor;
 	}
 
+	/**
+	 * Método para obter a lista de pesos optimizados pelo algoritmo NSGAII.
+	 * Este, utiliza o método menorValor para encontrar o menor valor falso negativo 
+	 * gerado pelo algoritmo.    
+	 * 
+	 * <br>
+	 * Tem como parametro a lista de regras que será utilizado o seu 
+	 * comprimento para localizar as posições de inicio e fim da lista 
+	 * de pesos a ela atribuida pelo algoritmo ou configuração automatizada 
+	 * {@code
+	 * int fim = regras.size() * linha;
+		int inicio = fim - regras.size()}
+	 * @param regras
+	 * Por fim adiciona os pesos  obtidos a lista de pesos a ser 
+	 * utilizada na ListView 
+	 */
 	public static void pesosOptimizados(ObservableList<String> regras) {
 
 		DadosDao rf = new DadosDao();

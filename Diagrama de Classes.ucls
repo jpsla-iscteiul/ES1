@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="antiSpamFilter.AntiSpamFilterAutomaticConfiguration" project="ES1-2017" 
+    file="/ES1-2017/src/antiSpamFilter/AntiSpamFilterAutomaticConfiguration.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="241" x="296" y="37"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="antiSpamFilter.AntiSpamFilterProblem" project="ES1-2017" 
+    file="/ES1-2017/src/antiSpamFilter/AntiSpamFilterProblem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="202" x="1311" y="37"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="pt.iscteiul.antispamfilter.controlers.AntiSpamFilterController" project="ES1-2017" 
+    file="/ES1-2017/src/pt/iscteiul/antispamfilter/controlers/AntiSpamFilterController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="215" x="41" y="37"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="pt.iscteiul.antispamfilter.models.AntiSpamMethods" project="ES1-2017" 
+    file="/ES1-2017/src/pt/iscteiul/antispamfilter/models/AntiSpamMethods.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="243" x="1028" y="37"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="5" language="java" name="pt.iscteiul.antispamfilter.models.TipoFicheiro" project="ES1-2017" 
+    file="/ES1-2017/src/pt/iscteiul/antispamfilter/models/TipoFicheiro.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="143" x="577" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="6" language="java" name="pt.iscteiul.antispamfilter.models.dao.DadosDao" project="ES1-2017" 
+    file="/ES1-2017/src/pt/iscteiul/antispamfilter/models/dao/DadosDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="228" x="760" y="37"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
