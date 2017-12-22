@@ -224,7 +224,7 @@ public class AntiSpamFilterController {
 
 	public void saveConfiguration() throws FileNotFoundException {
 
-		PrintWriter fileWriterrulesTF = new PrintWriter(new File(rulesTF.getText()));
+		PrintWriter fileWriterrulesTF = new PrintWriter(new File("AntiSpamConfigurationForLeisureMailbox/rules.cf"));
 		for (int i = 0; i < regras.size(); i++) {
 			fileWriterrulesTF.write(regras.get(i) + ";" + pesosRegras.get(i) + " ");
 		}
@@ -242,7 +242,7 @@ public class AntiSpamFilterController {
 
 	public void overwriteSavedConfiguration() throws FileNotFoundException {
 
-		PrintWriter fileWriterrules = new PrintWriter(new File(rulesTF.getText()));
+		PrintWriter fileWriterrules = new PrintWriter(new File("AntiSpamConfigurationForLeisureMailbox/rules.cf"));
 		for (int i = 0; i < regras.size(); i++) {
 			fileWriterrules.write(regras.get(i) + ";" + AntiSpamMethods.pesosListView.get(i) + " ");
 		}
