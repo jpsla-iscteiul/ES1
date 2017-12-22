@@ -24,7 +24,7 @@ public class Main extends Application {
 			Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
 			primaryStage.setX((primScreenBounds.getWidth() - primaryStage.getWidth()) / 2);
 			primaryStage.setY((primScreenBounds.getHeight() - primaryStage.getHeight()) / 4);
-			primaryStage.setTitle("AntiSpam Filter Configurator");
+			primaryStage.setTitle("Anti Spam Configuration For Leisure Mailbox");
 			primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("email.png")));
 			primaryStage.setScene(scene);
 			primaryStage.show();

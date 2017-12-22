@@ -1,10 +1,6 @@
 ﻿METIA1
 
-
-
 Grupo 44
-
-
 
 83169, João Lola, Scrum Master
 
@@ -14,10 +10,6 @@ Grupo 44
 
 83455, Cedrick Beta, Quality Manager
 
-
-
 Anti Spam Configuration For Leisure Mailbox
 
-
-
-Link para um vídeo no youtube com a demonstração da aplicação final desenvolvida (ex: http://...)
+https://www.youtube.com/watch?v=zafgJ9hmY1A
