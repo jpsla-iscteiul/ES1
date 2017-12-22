@@ -48,6 +48,8 @@ public class AntiSpamFilterController {
 	@FXML
 	private CheckBox hamCB;
 	@FXML
+	private CheckBox saveCB;
+	@FXML
 	private TextField weightsTF;
 	@FXML
 	private TextField rulesTF;
@@ -55,6 +57,8 @@ public class AntiSpamFilterController {
 	private TextField spamTF;
 	@FXML
 	private TextField hamTF;
+	@FXML
+	private TextField saveTF;
 
 	@FXML
 	private Label fpLBL;
@@ -111,6 +115,16 @@ public class AntiSpamFilterController {
 			if (spamCB.isSelected()) {
 				spamTF.setText(path);
 				spamCB.setSelected(false);
+			}
+
+			if (spamCB.isSelected()) {
+				spamTF.setText(path);
+				spamCB.setSelected(false);
+			}
+
+			if (saveCB.isSelected()) {
+				saveTF.setText(path);
+				saveCB.setSelected(false);
 			}
 		}
 	}
@@ -224,7 +238,7 @@ public class AntiSpamFilterController {
 
 	public void saveConfiguration() throws FileNotFoundException {
 
-		PrintWriter fileWriterrulesTF = new PrintWriter(new File(rulesTF.getText()));
+		PrintWriter fileWriterrulesTF = new PrintWriter(new File(saveTF.getText()));
 		for (int i = 0; i < regras.size(); i++) {
 			fileWriterrulesTF.write(regras.get(i) + ";" + pesosRegras.get(i) + " ");
 		}
@@ -242,7 +256,7 @@ public class AntiSpamFilterController {
 
 	public void overwriteSavedConfiguration() throws FileNotFoundException {
 
-		PrintWriter fileWriterrules = new PrintWriter(new File(rulesTF.getText()));
+		PrintWriter fileWriterrules = new PrintWriter(new File(saveTF.getText()));
 		for (int i = 0; i < regras.size(); i++) {
 			fileWriterrules.write(regras.get(i) + ";" + AntiSpamMethods.pesosListView.get(i) + " ");
 		}
